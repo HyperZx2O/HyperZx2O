@@ -24,7 +24,7 @@ import hackathons from '../content/hackathons.json';
               <span class="timeline-date mono-label">{h.date}</span>
             </div>
             <div class="timeline-dot" aria-hidden="true"></div>
-            <div class="timeline-card stack-hover min-w-0">
+            <div class="timeline-card stack-hover min-w-0 card-spotlight-active">
               <div class="card-spotlight" aria-hidden="true"></div>
               <div class="card-top">
                 <h2 class="event-name heading-3 text-truncate">{h.event}</h2>
@@ -179,23 +179,6 @@ import hackathons from '../content/hackathons.json';
     outline-offset: 2px;
   }
 
-  /* Cursor spotlight */
-  .timeline-card > .card-spotlight {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    background: radial-gradient(
-      500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(237, 255, 69, 0.06),
-      transparent 40%
-    );
-    pointer-events: none;
-    z-index: 0;
-  }
-  .timeline-card:hover > .card-spotlight {
-    opacity: 1;
-  }
   .timeline-card > * {
     position: relative;
     z-index: 1;
@@ -314,28 +297,9 @@ import hackathons from '../content/hackathons.json';
   });
 
   // Tilt + spotlight
-  function applyTilt(e: MouseEvent) {
-    const card = e.currentTarget as HTMLElement;
-    const rect = card.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    const dx = (e.clientX - cx) / (rect.width / 2);
-    const dy = (e.clientY - cy) / (rect.height / 2);
-    card.style.setProperty('--tilt-x', `${dy * 6}deg`);
-    card.style.setProperty('--tilt-y', `${-dx * 6}deg`);
-    const mx = ((e.clientX - rect.left) / rect.width) * 100;
-    const my = ((e.clientY - rect.top) / rect.height) * 100;
-    card.style.setProperty('--mouse-x', `${mx}%`);
-    card.style.setProperty('--mouse-y', `${my}%`);
-  }
-  function resetTilt(e: MouseEvent) {
-    const card = e.currentTarget as HTMLElement;
-    card.style.setProperty('--tilt-x', '0deg');
-    card.style.setProperty('--tilt-y', '0deg');
-  }
   cards.forEach(card => {
-    card.addEventListener('mousemove', applyTilt);
-    card.addEventListener('mouseleave', resetTilt);
-    card.addEventListener('touchstart', resetTilt);
+    card.addEventListener('mousemove', (e: MouseEvent) => (window as any).applyTilt(e));
+    card.addEventListener('mouseleave', (e: MouseEvent) => (window as any).resetTilt(e));
+    card.addEventListener('touchstart', (e: MouseEvent) => (window as any).resetTilt(e));
   });
 </script>

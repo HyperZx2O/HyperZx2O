@@ -70,7 +70,7 @@ const base = import.meta.env.BASE_URL;
 
       <div class="featured-grid stagger">
         <!-- ContextForge -->
-        <article class="featured-card featured-card--wide t-border-beam-on min-w-0">
+        <article class="featured-card featured-card--wide t-border-beam-on min-w-0 card-spotlight-active">
           <div class="t-border-beam"></div>
           <div class="card-spotlight" aria-hidden="true"></div>
           <figure class="featured-preview">
@@ -110,7 +110,7 @@ const base = import.meta.env.BASE_URL;
         </article>
 
         <!-- Translucent Win11 -->
-        <article class="featured-card featured-card--compact t-border-beam-on min-w-0">
+        <article class="featured-card featured-card--compact t-border-beam-on min-w-0 card-spotlight-active">
           <div class="t-border-beam"></div>
           <div class="card-spotlight" aria-hidden="true"></div>
           <figure class="featured-preview">
@@ -146,7 +146,7 @@ const base = import.meta.env.BASE_URL;
     <div class="container">
       <div class="cp-grid">
         <div class="cp-float-wrap">
-          <figure class="cp-card">
+          <figure class="cp-card card-spotlight-active">
             <div class="cp-card-inner">
               <img src={`${base}profileCard.png`} alt="Codeforces profile" width="600" height="400" loading="lazy" decoding="async" />
               <svg class="cp-card-grain" aria-hidden="true"><filter id="cp-noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#cp-noise)"/></svg>
@@ -180,7 +180,7 @@ const base = import.meta.env.BASE_URL;
           </div>
         </div>
         <div class="devcard-float-wrap">
-          <figure class="stats-devcard devcard">
+          <figure class="stats-devcard devcard card-spotlight-active">
             <div class="devcard-inner">
               <img src={`${base}devCard.png`} alt="GitHub stats" width="495" height="195" loading="lazy" decoding="async" />
               <svg class="devcard-grain" aria-hidden="true"><filter id="dc-noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#dc-noise)"/></svg>
@@ -288,33 +288,10 @@ const base = import.meta.env.BASE_URL;
   <script is:inline>
     // Cursor‑reactive tilt + spotlight for featured cards
     const tiltCards = document.querySelectorAll('.featured-card, .cp-card, .devcard');
-    function applyTilt(e) {
-      const card = e.currentTarget;
-      const rect = card.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const dx = (e.clientX - cx) / (rect.width / 2);
-      const dy = (e.clientY - cy) / (rect.height / 2);
-      const maxTilt = 6;
-      const tiltX = dy * maxTilt;
-      const tiltY = -dx * maxTilt;
-      card.style.setProperty('--tilt-x', `${tiltX}deg`);
-      card.style.setProperty('--tilt-y', `${tiltY}deg`);
-      // Spotlight position
-      const mx = ((e.clientX - rect.left) / rect.width) * 100;
-      const my = ((e.clientY - rect.top) / rect.height) * 100;
-      card.style.setProperty('--mouse-x', `${mx}%`);
-      card.style.setProperty('--mouse-y', `${my}%`);
-    }
-    function resetTilt(e) {
-      const card = e.currentTarget;
-      card.style.setProperty('--tilt-x', `0deg`);
-      card.style.setProperty('--tilt-y', `0deg`);
-    }
     tiltCards.forEach(card => {
-      card.addEventListener('mousemove', applyTilt);
-      card.addEventListener('mouseleave', resetTilt);
-      card.addEventListener('touchstart', resetTilt);
+      card.addEventListener('mousemove', (e) => (window as any).applyTilt(e));
+      card.addEventListener('mouseleave', (e) => (window as any).resetTilt(e));
+      card.addEventListener('touchstart', (e) => (window as any).resetTilt(e));
     });
   </script>
 
@@ -614,10 +591,7 @@ const base = import.meta.env.BASE_URL;
     line-height: 1.65;
     margin-bottom: var(--space-lg);
   }
-  .hero-expand {
-    border-top: 1px solid var(--color-border-subtle);
-    padding-top: var(--space-md);
-  }
+
   .hero-expand-toggle {
     cursor: pointer;
     color: var(--color-accent);
@@ -679,24 +653,6 @@ const base = import.meta.env.BASE_URL;
   .featured-card:focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
-  }
-
-  /* Cursor spotlight */
-  .card-spotlight {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    background: radial-gradient(
-      600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(237, 255, 69, 0.06),
-      transparent 40%
-    );
-    pointer-events: none;
-    z-index: 0;
-  }
-  .featured-card:hover .card-spotlight {
-    opacity: 1;
   }
 
   .featured-body-wrap {
@@ -910,15 +866,6 @@ const base = import.meta.env.BASE_URL;
   .img-dialog-close:focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
-  }
-
-  .section-cta {
-    display: inline-block;
-    margin-top: var(--space-2xl);
-    color: var(--color-accent);
-    font-size: var(--text-xs);
-    border-bottom: 1px solid var(--color-accent);
-    padding-bottom: 2px;
   }
 
   /* Competitive Programming */

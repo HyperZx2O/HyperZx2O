@@ -11,13 +11,9 @@ const categories = [
   { key: 'tool', label: 'Tool' },
 ];
 
-const categoryLabels: Record<string, string> = {
-  'fullstack': 'FULL-STACK',
-  'ai-ml': 'AI/ML',
-  'systems': 'SYSTEMS',
-  'game': 'GAME',
-  'tool': 'TOOL',
-};
+const categoryLabels = Object.fromEntries(
+  categories.filter(c => c.key !== 'all').map(c => [c.key, c.label.toUpperCase()])
+);
 ---
 <Layout title="Projects — HyperZx2O">
 
@@ -46,7 +42,7 @@ const categoryLabels: Record<string, string> = {
       <div class="project-grid stagger">
         {projects.map((project, i) => (
           <article
-            class={`project-card stack-hover min-w-0${i % 3 === 0 ? ' project-card--accent' : ''}`}
+            class={`project-card stack-hover min-w-0 card-spotlight-active${i % 3 === 0 ? ' project-card--accent' : ''}`}
             data-category={project.category}
           >
             <div class="card-spotlight" aria-hidden="true"></div>
@@ -172,23 +168,6 @@ const categoryLabels: Record<string, string> = {
     background: linear-gradient(135deg, rgba(237, 255, 69, 0.03) 0%, transparent 60%);
   }
 
-  /* Cursor spotlight */
-  .project-card > .card-spotlight {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    background: radial-gradient(
-      500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(237, 255, 69, 0.06),
-      transparent 40%
-    );
-    pointer-events: none;
-    z-index: 0;
-  }
-  .project-card:hover > .card-spotlight {
-    opacity: 1;
-  }
   .project-card > * {
     position: relative;
     z-index: 1;
@@ -318,30 +297,9 @@ const categoryLabels: Record<string, string> = {
   });
 
   // Tilt + spotlight
-  function applyTilt(e: MouseEvent) {
-    const card = e.currentTarget as HTMLElement;
-    const rect = card.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    const dx = (e.clientX - cx) / (rect.width / 2);
-    const dy = (e.clientY - cy) / (rect.height / 2);
-    const tiltX = dy * 6;
-    const tiltY = -dx * 6;
-    card.style.setProperty('--tilt-x', `${tiltX}deg`);
-    card.style.setProperty('--tilt-y', `${tiltY}deg`);
-    const mx = ((e.clientX - rect.left) / rect.width) * 100;
-    const my = ((e.clientY - rect.top) / rect.height) * 100;
-    card.style.setProperty('--mouse-x', `${mx}%`);
-    card.style.setProperty('--mouse-y', `${my}%`);
-  }
-  function resetTilt(e: MouseEvent) {
-    const card = e.currentTarget as HTMLElement;
-    card.style.setProperty('--tilt-x', '0deg');
-    card.style.setProperty('--tilt-y', '0deg');
-  }
   cards.forEach(card => {
-    card.addEventListener('mousemove', applyTilt);
-    card.addEventListener('mouseleave', resetTilt);
-    card.addEventListener('touchstart', resetTilt);
+    card.addEventListener('mousemove', (e: MouseEvent) => (window as any).applyTilt(e));
+    card.addEventListener('mouseleave', (e: MouseEvent) => (window as any).resetTilt(e));
+    card.addEventListener('touchstart', (e: MouseEvent) => (window as any).resetTilt(e));
   });
 </script>

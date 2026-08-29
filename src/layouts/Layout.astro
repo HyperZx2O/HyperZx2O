@@ -339,7 +339,6 @@ const navItems = [
       autoRaf: true,
       respectReducedMotion: true,
     });
-    (window as any).__lenis = lenis;
 
     // Scroll to top on load (avoids scroll restoration flash)
     lenis.scrollTo(0, { immediate: true });
@@ -451,6 +450,27 @@ const navItems = [
         localStorage.setItem('portfolio-welcome-seen', 'true');
       });
     }
+
+    // --- Shared tilt + spotlight (used by all pages) ---
+    (window as any).applyTilt = function(e: MouseEvent) {
+      const card = e.currentTarget as HTMLElement;
+      const rect = card.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = (e.clientX - cx) / (rect.width / 2);
+      const dy = (e.clientY - cy) / (rect.height / 2);
+      card.style.setProperty('--tilt-x', `${dy * 6}deg`);
+      card.style.setProperty('--tilt-y', `${-dx * 6}deg`);
+      const mx = ((e.clientX - rect.left) / rect.width) * 100;
+      const my = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty('--mouse-x', `${mx}%`);
+      card.style.setProperty('--mouse-y', `${my}%`);
+    };
+    (window as any).resetTilt = function(e: MouseEvent) {
+      const card = e.currentTarget as HTMLElement;
+      card.style.setProperty('--tilt-x', '0deg');
+      card.style.setProperty('--tilt-y', '0deg');
+    };
   </script>
 </body>
 </html>
