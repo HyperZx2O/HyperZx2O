@@ -1,0 +1,90 @@
+[
+  {
+    "event": "Casemotion 2025",
+    "date": "Jul-Aug 2025",
+    "team": "Md Imtiaz Alam, Sazid Hasan Khan, Md Khalid Bin Shahirul",
+    "project": "VoltEdge",
+    "projectUrl": null,
+    "status": "didn't qualify"
+  },
+  {
+    "event": "DevSprint Hackathon",
+    "date": "Mar 2026",
+    "team": "Aquib Al Razi, Fairooz Raisa",
+    "project": "IUT Barakah Bites",
+    "projectUrl": "https://github.com/HyperZx2O/iut-barakahbites",
+    "status": "finalist"
+  },
+  {
+    "event": "CodeSprint Hackathon",
+    "date": "May-Jun 2026",
+    "team": "Tasmiah Tanha, Montaha Zaman",
+    "project": "CareerPilot",
+    "projectUrl": "https://github.com/HyperZx2O/careerpilot",
+    "status": "didn't qualify"
+  },
+  {
+    "event": "BRAC Infinity AI Build Fest",
+    "date": "May-Jun 2026",
+    "team": "Noha Saabreen, Golam Muhammad Walid, Md Aryan Rahman, Nusaiba Zafnah, Mohtasiba Hossain",
+    "project": "Lamina",
+    "projectUrl": "https://github.com/HyperZx2O/lamina.io",
+    "status": "finalist"
+  },
+  {
+    "event": "SUST CSE Carnival",
+    "date": "Jun 2026",
+    "team": "Tasin Huda, Shafin Rahman Khan",
+    "project": "queuestorm-investigator",
+    "projectUrl": null,
+    "status": "didn't qualify"
+  },
+  {
+    "event": "July Hackathon",
+    "date": "Jul 2026",
+    "team": "Noha Saabreen",
+    "project": "Mukto Mesh",
+    "projectUrl": "https://github.com/HyperZx2O/mukto-mesh",
+    "status": "didn't qualify"
+  },
+  {
+    "event": "Techathon Nationals",
+    "date": "Jul 2026",
+    "team": "Toshrif Alam, Montaha Zaman, Afra Tasfia",
+    "project": "PowerDesk",
+    "projectUrl": "https://github.com/HyperZx2O/PowerDesk",
+    "status": "didn't qualify"
+  },
+  {
+    "event": "SMUCT CSE Festival",
+    "date": "Jul 2026",
+    "team": "Noha Saabreen, Abu Iftekhar Ahmed",
+    "project": "ContextForge",
+    "projectUrl": "https://github.com/HyperZx2O/contextforge",
+    "status": "finalist"
+  },
+  {
+    "event": "IUT ICT Fest",
+    "date": "Jul 2026",
+    "team": "Noha Saabreen, Montaha Zaman",
+    "project": "Bug fixing hackathon",
+    "projectUrl": null,
+    "status": "didn't qualify"
+  },
+  {
+    "event": "IUT Micromobility Challenge",
+    "date": "Jul 2026",
+    "team": "Raiyan Rahman, Tasmiah Tanha, Md Rezwan Uz Zaman, Ayesha Chowdhury Aronti",
+    "project": "COMM",
+    "projectUrl": null,
+    "status": "didn't qualify"
+  },
+  {
+    "event": "QuantamHacks",
+    "date": "Aug 2026",
+    "team": "Noha Saabreen",
+    "project": "Reading Into You",
+    "projectUrl": "https://github.com/HyperZx2O/reading-into-you",
+    "status": "pending"
+  }
+]

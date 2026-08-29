@@ -1,0 +1,102 @@
+[
+  {
+    "name": "Mukto Mesh",
+    "description": "Offline-first community hub for crisis coordination during internet shutdowns. Chat, safety check-ins, missing persons, emergency news — all on a local WiFi network with zero cloud dependency.",
+    "tech": ["React 19", "Hono.js", "SQLite", "WebSocket", "PWA"],
+    "github": "https://github.com/HyperZx2O/mukto-mesh",
+    "live": "https://mukto-mesh.sadman-zarifsaif.workers.dev/",
+    "stars": 40,
+    "category": "fullstack",
+    "fork": false
+  },
+  {
+    "name": "ContextForge",
+    "description": "Research intelligence platform that ingests papers, code, and news, then builds a typed knowledge graph surfacing contradictions, gaps, and extensions that traditional lit reviews miss.",
+    "tech": ["Python", "FastAPI", "Neo4j", "React", "SciSpaCy"],
+    "github": "https://github.com/HyperZx2O/contextforge",
+    "live": "https://contextforge-chi.vercel.app",
+    "stars": 0,
+    "category": "ai-ml",
+    "fork": false
+  },
+  {
+    "name": "CareerPilot",
+    "description": "AI-powered career platform with live job search, CV-to-vector fit scoring, a Kanban application tracker, and a RAG career coach grounded in your actual skills.",
+    "tech": ["Next.js 15", "FastAPI", "Pinecone", "Groq", "Supabase"],
+    "github": "https://github.com/HyperZx2O/careerpilot",
+    "live": "https://career-pilot-opal-nine.vercel.app",
+    "stars": 1,
+    "category": "ai-ml",
+    "fork": false
+  },
+  {
+    "name": "IUT Barakah Bites",
+    "description": "Distributed microservices cafeteria ordering system with 5 Dockerized services, real-time SSE order tracking, a kitchen job queue, and chaos-tested resilience.",
+    "tech": ["React", "Node.js", "PostgreSQL", "Redis", "Docker"],
+    "github": "https://github.com/HyperZx2O/iut-barakahbites",
+    "live": "https://iut-barakahbites.vercel.app",
+    "stars": 1,
+    "category": "fullstack",
+    "fork": false
+  },
+  {
+    "name": "Lamina",
+    "description": "Bilingual AI education assistant for Bangladeshi students with RAG over NCTB curriculum, an adaptive tutor, teacher copilot, and full offline PWA support.",
+    "tech": ["React", "Vite", "Express", "Anthropic", "TF-IDF"],
+    "github": "https://github.com/HyperZx2O/lamina.io",
+    "live": "https://lamina-io.onrender.com/",
+    "stars": 1,
+    "category": "ai-ml",
+    "fork": false
+  },
+  {
+    "name": "PowerDesk",
+    "description": "Real-time office device simulator with a live React dashboard, REST/WebSocket backend, and a Discord bot for instant power monitoring and alerts.",
+    "tech": ["React 19", "Express 5", "WebSocket", "discord.js", "Zod"],
+    "github": "https://github.com/HyperZx2O/PowerDesk",
+    "live": "https://power-desk.vercel.app/",
+    "stars": 0,
+    "category": "fullstack",
+    "fork": true
+  },
+  {
+    "name": "Ayatika",
+    "description": "Desktop Quran study application written entirely in C. Full navigation across 114 Surahs, Vim-style controls, prayer times, bookmarks, fuzzy search, and an Azan screensaver.",
+    "tech": ["C", "RayLib", "SQLite3", "libcurl", "FriBidi"],
+    "github": "https://github.com/HyperZx2O/Ayatika",
+    "live": null,
+    "stars": 1,
+    "category": "systems",
+    "fork": false
+  },
+  {
+    "name": "Reading Into You",
+    "description": "Psychological browser game in two modes: get profiled by an AI mentalist, or learn to read people yourself. 145 tests, WCAG 2.1 AA, typewriter aesthetic.",
+    "tech": ["React 18", "Vite 6", "CSS Modules", "uisfx"],
+    "github": "https://github.com/HyperZx2O/reading-into-you",
+    "live": "https://reading-into-you-rmti.vercel.app/",
+    "stars": 0,
+    "category": "game",
+    "fork": false
+  },
+  {
+    "name": "Notes Porbo",
+    "description": "All-in-one study dashboard for IUT CSE course materials, organized by semester with daily-synced Drive extras via GitHub Actions.",
+    "tech": ["HTML", "CSS", "JavaScript", "GitHub Actions"],
+    "github": "https://github.com/HyperZx2O/notes-porbo",
+    "live": "https://hyperzx2o.github.io/notes-porbo/",
+    "stars": 4,
+    "category": "tool",
+    "fork": false
+  },
+  {
+    "name": "Translucent Win11",
+    "description": "Community guide to giving Windows 11 a glassmorphism makeover — system theming, app replacements, tiling WM setup, and browser customization.",
+    "tech": ["Documentation", "Windows", "CSS"],
+    "github": "https://github.com/HyperZx2O/Translucent-Win11",
+    "live": null,
+    "stars": 92,
+    "category": "tool",
+    "fork": false
+  }
+]

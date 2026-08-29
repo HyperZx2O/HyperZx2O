@@ -1,0 +1,341 @@
+---
+import Layout from '../layouts/Layout.astro';
+import hackathons from '../content/hackathons.json';
+---
+<Layout title="Events — HyperZx2O">
+
+  <section class="events-hero section">
+    <div class="container">
+      <p class="section-tag mono-label">Track Record</p>
+      <h1 class="display-md">Events</h1>
+      <p class="body-lg muted">Built under pressure. Shipped on time.</p>
+    </div>
+  </section>
+
+  <section class="events-timeline">
+    <div class="container">
+      <div class="timeline">
+        <div class="timeline-track" aria-hidden="true">
+          <div class="timeline-line"></div>
+        </div>
+        {hackathons.map((h, i) => (
+          <article class="timeline-item" data-index={i}>
+            <div class="timeline-left">
+              <span class="timeline-date mono-label">{h.date}</span>
+            </div>
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-card stack-hover min-w-0">
+              <div class="card-spotlight" aria-hidden="true"></div>
+              <div class="card-top">
+                <h2 class="event-name heading-3 text-truncate">{h.event}</h2>
+                <span class={`status-badge mono-label ${h.status === 'finalist' ? 'status--finalist' : h.status === 'pending' ? 'status--pending' : 'status--no'}`}>{h.status === 'finalist' ? 'Finalist' : h.status === 'pending' ? 'Pending' : 'Participated'}</span>
+              </div>
+              {h.projectUrl ? (
+                <a href={h.projectUrl} target="_blank" rel="noopener" class="project-name mono-label">{h.project} →</a>
+              ) : (
+                <span class="project-name project-name--plain mono-label">{h.project}</span>
+              )}
+              <p class="team-names">{h.team}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  .events-hero .display-md {
+    margin-bottom: var(--space-lg);
+  }
+
+  /* Timeline */
+  .timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xl);
+  }
+
+  /* Continuous line track */
+  .timeline-track {
+    display: none;
+  }
+  @media (min-width: 768px) {
+    .timeline-track {
+      display: block;
+      position: absolute;
+      left: 120px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      margin-left: 0;
+      transform: translateX(-0.5px);
+    }
+    .timeline-line {
+      width: 100%;
+      height: 100%;
+      background: var(--color-border-subtle);
+      transform-origin: top;
+      transform: scaleY(0);
+      transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .timeline.is-visible .timeline-line {
+      transform: scaleY(1);
+    }
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    opacity: 0;
+    transform: translateX(var(--slide-from, 0px));
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .timeline-item.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  @media (min-width: 768px) {
+    .timeline-item {
+      grid-template-columns: 120px 7px 1fr;
+      gap: var(--space-xl);
+      align-items: start;
+    }
+    .timeline-item[data-index="0"],
+    .timeline-item[data-index="2"],
+    .timeline-item[data-index="4"],
+    .timeline-item[data-index="6"],
+    .timeline-item[data-index="8"] {
+      --slide-from: -40px;
+    }
+    .timeline-item[data-index="1"],
+    .timeline-item[data-index="3"],
+    .timeline-item[data-index="5"],
+    .timeline-item[data-index="7"],
+    .timeline-item[data-index="9"] {
+      --slide-from: 40px;
+    }
+  }
+
+  .timeline-left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .timeline-date {
+    color: var(--color-accent);
+    font-size: var(--text-xs);
+    padding-top: var(--space-xs);
+  }
+
+  /* Dot */
+  .timeline-dot {
+    display: none;
+  }
+  @media (min-width: 768px) {
+    .timeline-dot {
+      display: block;
+      width: 7px;
+      height: 7px;
+      border-radius: var(--radius-full);
+      background: var(--color-text-muted);
+      margin-top: 6px;
+      position: relative;
+      z-index: 2;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+    .timeline-item:has(.status--finalist) .timeline-dot {
+      background: var(--color-accent);
+    }
+    .timeline-item.is-dot-active .timeline-dot {
+      transform: scale(1.8);
+      box-shadow: 0 0 12px rgba(237, 255, 69, 0.5);
+      background: var(--color-accent);
+    }
+  }
+
+  /* Card */
+  .timeline-card {
+    border: 1px solid var(--color-border-subtle);
+    padding: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    position: relative;
+    overflow: hidden;
+    perspective: 800px;
+    transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+    transition: border-color var(--transition-instant), transform var(--transition-fast);
+  }
+  .timeline-card:hover {
+    border-color: var(--color-accent);
+  }
+  .timeline-card:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  /* Cursor spotlight */
+  .timeline-card > .card-spotlight {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background: radial-gradient(
+      500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(237, 255, 69, 0.06),
+      transparent 40%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+  .timeline-card:hover > .card-spotlight {
+    opacity: 1;
+  }
+  .timeline-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-md);
+  }
+
+  .event-name {
+    color: var(--color-text);
+    flex: 1;
+  }
+
+  /* Status badges */
+  .status-badge {
+    flex-shrink: 0;
+    padding: var(--space-xs) var(--space-md);
+    font-size: var(--text-xs);
+    white-space: nowrap;
+  }
+  .status--finalist {
+    background: var(--color-accent);
+    color: var(--color-primary);
+  }
+  .status--pending {
+    background: var(--color-surface);
+    color: var(--color-primary);
+  }
+  .status--no {
+    background: transparent;
+    color: var(--color-text-muted);
+  }
+
+  /* Project name */
+  .project-name {
+    color: var(--color-accent);
+    font-size: var(--text-xs);
+    display: inline-block;
+    transition: opacity var(--transition-instant);
+  }
+  .project-name:hover {
+    opacity: 0.8;
+  }
+  .project-name--plain {
+    cursor: default;
+  }
+
+  /* Team */
+  .team-names {
+    color: var(--color-text-muted);
+    font-size: var(--text-base);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .timeline-line {
+      transition: none !important;
+      transform: scaleY(1) !important;
+    }
+    .timeline-item {
+      transition: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    .timeline-card {
+      transition: border-color var(--transition-instant) !important;
+      transform: none !important;
+    }
+    .timeline-dot {
+      transition: none !important;
+    }
+  }
+</style>
+
+<script>
+  // Scroll-triggered line draw
+  const timeline = document.querySelector('.timeline');
+  if (timeline) {
+    const lineObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            timeline.classList.add('is-visible');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    lineObserver.observe(timeline);
+  }
+
+  // Staggered card entrance
+  const items = document.querySelectorAll('.timeline-item');
+  const cardObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+  );
+  items.forEach(item => cardObserver.observe(item));
+
+  // Hover dot connection
+  const cards = document.querySelectorAll('.timeline-card');
+  cards.forEach(card => {
+    const item = card.closest('.timeline-item');
+    if (!item) return;
+    card.addEventListener('mouseenter', () => item.classList.add('is-dot-active'));
+    card.addEventListener('mouseleave', () => item.classList.remove('is-dot-active'));
+  });
+
+  // Tilt + spotlight
+  function applyTilt(e: MouseEvent) {
+    const card = e.currentTarget as HTMLElement;
+    const rect = card.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = (e.clientX - cx) / (rect.width / 2);
+    const dy = (e.clientY - cy) / (rect.height / 2);
+    card.style.setProperty('--tilt-x', `${dy * 6}deg`);
+    card.style.setProperty('--tilt-y', `${-dx * 6}deg`);
+    const mx = ((e.clientX - rect.left) / rect.width) * 100;
+    const my = ((e.clientY - rect.top) / rect.height) * 100;
+    card.style.setProperty('--mouse-x', `${mx}%`);
+    card.style.setProperty('--mouse-y', `${my}%`);
+  }
+  function resetTilt(e: MouseEvent) {
+    const card = e.currentTarget as HTMLElement;
+    card.style.setProperty('--tilt-x', '0deg');
+    card.style.setProperty('--tilt-y', '0deg');
+  }
+  cards.forEach(card => {
+    card.addEventListener('mousemove', applyTilt);
+    card.addEventListener('mouseleave', resetTilt);
+    card.addEventListener('touchstart', resetTilt);
+  });
+</script>

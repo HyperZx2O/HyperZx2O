@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="404 — HyperZx2O">
+
+  <section class="not-found">
+    <div class="container">
+      <p class="error-code display-hero">404</p>
+      <p class="error-msg heading-2">Lost in the stack.</p>
+      <p class="error-sub body-lg">This page doesn't exist. Yet. Or maybe you just hit a typo.</p>
+      <a href="/" class="error-link mono-label">Back to safety →</a>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  .not-found {
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding-top: 56px;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xl);
+  }
+  .error-code {
+    color: var(--color-accent);
+    opacity: 0.3;
+    font-size: clamp(6rem, 25vw, 20rem);
+    line-height: 0.8;
+    user-select: none;
+    animation: glitch 3s infinite;
+  }
+  .error-msg {
+    max-width: 16ch;
+  }
+  .error-sub {
+    color: var(--color-text-muted);
+    max-width: 36ch;
+  }
+  .error-link {
+    color: var(--color-accent);
+    font-size: var(--text-sm);
+    border-bottom: 1px solid var(--color-accent);
+    padding-bottom: 2px;
+    margin-top: var(--space-lg);
+  }
+  @keyframes glitch {
+    0%, 90%, 100% { opacity: 0.3; }
+    91% { opacity: 0.5; transform: translateX(-2px); }
+    92% { opacity: 0.3; transform: translateX(0); }
+    93% { opacity: 0.4; transform: translateX(1px); }
+    94% { opacity: 0.3; transform: translateX(0); }
+  }
+</style>

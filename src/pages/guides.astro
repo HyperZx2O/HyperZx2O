@@ -1,0 +1,187 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const guides = [
+  {
+    title: 'Translucent Win11',
+    description: 'A complete guide to giving Windows 11 a glassmorphism makeover — from system-level transparency tools to app-by-app configurations, all in one place.',
+    github: 'https://github.com/HyperZx2O/Translucent-Win11',
+    stars: 88,
+  },
+  {
+    title: 'Agentic Development Workflow',
+    description: 'A phase-locked, prompt-driven system for AI-assisted hackathon development. Spec it, plan it, code it, review it — no more "what are we building again" at 3am.',
+    github: 'https://github.com/HyperZx2O/agentic-development-workflow',
+    live: 'https://hyperzx2o.github.io/agentic-development-workflow/',
+    stars: 5,
+  },
+];
+---
+<Layout title="Guides — HyperZx2O">
+
+  <section class="guides-hero section">
+    <div class="container">
+      <p class="section-tag mono-label">Knowledge</p>
+      <h1 class="display-lg">Guides</h1>
+      <p class="body-lg muted">I write guides when I figure something out worth sharing.</p>
+    </div>
+  </section>
+
+  <section class="guides-list">
+    <div class="container">
+      <div class="guides-grid">
+        {guides.map(guide => (
+          <article class="guide-card stack-hover min-w-0">
+            <div class="card-spotlight" aria-hidden="true"></div>
+            <div class="guide-card-inner">
+              <div class="guide-header">
+                <h2 class="heading-2 text-truncate">{guide.title}</h2>
+                <span class="guide-stars mono-label">⭐ {guide.stars}</span>
+              </div>
+              <p class="guide-desc">{guide.description}</p>
+              <div class="guide-links">
+                <a href={guide.github} target="_blank" rel="noopener" class="guide-link mono-label">GitHub →</a>
+                {guide.live && (
+                  <a href={guide.live} target="_blank" rel="noopener" class="guide-link mono-label">Live Site →</a>
+                )}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <p class="guides-extensible mono-label">I'm always learning. More guides when I find something worth sharing.</p>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  .guides-hero .display-lg {
+    margin-bottom: var(--space-lg);
+  }
+
+  .guides-grid {
+    display: grid;
+    gap: var(--space-xl);
+  }
+  @media (min-width: 768px) {
+    .guides-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .guide-card {
+    border: 1px solid var(--color-border-subtle);
+    padding: var(--space-2xl);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    perspective: 800px;
+    transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+    transition: border-color var(--transition-instant), transform var(--transition-fast);
+  }
+  .guide-card:hover {
+    border-color: var(--color-accent);
+  }
+  .guide-card:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  /* Cursor spotlight */
+  .guide-card > .card-spotlight {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background: radial-gradient(
+      500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(237, 255, 69, 0.06),
+      transparent 40%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+  .guide-card:hover > .card-spotlight {
+    opacity: 1;
+  }
+  .guide-card > * {
+    position: relative;
+    z-index: 1;
+  }
+  .guide-card-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    height: 100%;
+  }
+  .guide-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-md);
+  }
+  .guide-stars {
+    color: var(--color-accent);
+    font-size: var(--text-sm);
+    flex-shrink: 0;
+  }
+  .guide-desc {
+    color: var(--color-text-muted);
+    font-size: var(--text-base);
+    line-height: 1.7;
+    flex: 1;
+  }
+  .guide-links {
+    display: flex;
+    gap: var(--space-xl);
+    margin-top: auto;
+  }
+  .guide-link {
+    color: var(--color-accent);
+    font-size: var(--text-xs);
+  }
+
+  .guides-extensible {
+    margin-top: var(--space-3xl);
+    color: var(--color-text-muted);
+    font-size: var(--text-xs);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .guide-card {
+      transition: border-color var(--transition-instant) !important;
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  const cards = document.querySelectorAll('.guide-card');
+  function applyTilt(e: MouseEvent) {
+    const card = e.currentTarget as HTMLElement;
+    const rect = card.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = (e.clientX - cx) / (rect.width / 2);
+    const dy = (e.clientY - cy) / (rect.height / 2);
+    card.style.setProperty('--tilt-x', `${dy * 6}deg`);
+    card.style.setProperty('--tilt-y', `${-dx * 6}deg`);
+    const mx = ((e.clientX - rect.left) / rect.width) * 100;
+    const my = ((e.clientY - rect.top) / rect.height) * 100;
+    card.style.setProperty('--mouse-x', `${mx}%`);
+    card.style.setProperty('--mouse-y', `${my}%`);
+  }
+  function resetTilt(e: MouseEvent) {
+    const card = e.currentTarget as HTMLElement;
+    card.style.setProperty('--tilt-x', '0deg');
+    card.style.setProperty('--tilt-y', '0deg');
+  }
+  cards.forEach(card => {
+    card.addEventListener('mousemove', applyTilt);
+    card.addEventListener('mouseleave', resetTilt);
+    card.addEventListener('touchstart', resetTilt);
+  });
+</script>
