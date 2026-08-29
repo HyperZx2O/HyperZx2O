@@ -1,4 +1,4 @@
-<h1 align="center">Hi, I'm MD. Sadman Saif Zarif <img src="https://raw.githubusercontent.com/kauecismic/readme-typing-svg/refs/heads/main/svg/Fading%20Cursor/fading_cursor.svg" width="30px"></h1>
+<h1 align="center">Hi, I'm MD. Sadman Saif Zarif</h1>
 
 <p align="center">
   <a href="https://github.com/HyperZx2O">
