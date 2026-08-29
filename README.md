@@ -49,29 +49,18 @@
 
 ### GitHub Stats
 
-<p align="center">
-  <a href="https://github.com/HyperZx2O">
-    <img src="https://gitglance-eight.vercel.app/api/stats?username=HyperZx2O&bg_color=0d1117&text_color=c9d1d9&accent_color=EDFF45" alt="GitHub Stats" />
-  </a>
-</p>
-
-<p align="center">
-  <a href="https://github.com/HyperZx2O">
-    <img src="https://gitglance-eight.vercel.app/api/langs?username=HyperZx2O&bg_color=0d1117&text_color=c9d1d9&accent_color=EDFF45" alt="Top Languages" />
-  </a>
-</p>
-
-<p align="center">
-  <a href="https://github.com/HyperZx2O">
-    <img src="https://streak-stats.demolab.com?user=HyperZx2O&theme=dark&hide_border=true&background=0d1117&ring=EDFF45&fire=EDFF45&currStreakLabel=c9d1d9&sideLabels=c9d1d9&dates=555555" alt="GitHub Streak" />
-  </a>
-</p>
-
-<p align="center">
-  <a href="https://github.com/HyperZx2O">
-    <img src="https://gitglance-eight.vercel.app/api/activity?username=HyperZx2O&days=365&bg_color=0d1117&accent_color=EDFF45" alt="Activity Graph" />
-  </a>
-</p>
+<table>
+  <tr>
+    <td><a href="https://github.com/HyperZx2O"><img src="https://gitglance-eight.vercel.app/api/stats?username=HyperZx2O&bg_color=0d1117&text_color=c9d1d9&accent_color=EDFF45&width=490" alt="GitHub Stats" /></a></td>
+    <td><a href="https://github.com/HyperZx2O"><img src="https://gitglance-eight.vercel.app/api/langs?username=HyperZx2O&bg_color=0d1117&text_color=c9d1d9&accent_color=EDFF45&width=490" alt="Top Languages" /></a></td>
+  </tr>
+  <tr>
+    <td colspan="2"><a href="https://github.com/HyperZx2O"><img src="https://gitglance-eight.vercel.app/api/activity?username=HyperZx2O&days=365&bg_color=0d1117&accent_color=EDFF45&width=1000" alt="Activity Graph" /></a></td>
+  </tr>
+  <tr>
+    <td colspan="2"><a href="https://github.com/HyperZx2O"><img src="https://streak-stats.demolab.com?user=HyperZx2O&theme=dark&hide_border=true&background=0d1117&ring=EDFF45&fire=EDFF45&currStreakLabel=c9d1d9&sideLabels=c9d1d9&dates=555555" alt="GitHub Streak" /></a></td>
+  </tr>
+</table>
 
 ---
 
