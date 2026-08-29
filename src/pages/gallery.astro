@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import photos from '../content/photos.json';
+const base = import.meta.env.BASE_URL;
+const photosJs = JSON.stringify(photos.map(p => ({ ...p, src: base + p.src })));
 ---
 <Layout title="Gallery — HyperZx2O">
 
@@ -22,7 +24,7 @@ import photos from '../content/photos.json';
             style={`--i: ${i}`}
           >
             <img
-              src={photo.src}
+              src={`${base}${photo.src}`}
               alt={photo.alt}
               width="800"
               height="500"
@@ -254,8 +256,9 @@ import photos from '../content/photos.json';
   }
 </style>
 
+<script is:inline set:html={`var photos = ${photosJs};`}></script>
+
 <script is:inline>
-  const photos = [{"src":"/gallery/DSC_4786.jpg","alt":"Photography","size":"large"},{"src":"/gallery/20260119_161651.jpg","alt":"Photography","size":"large"},{"src":"/gallery/DSC_4796.jpg","alt":"Photography","size":"small"},{"src":"/gallery/DSC_4823.jpg","alt":"Photography","size":"small"},{"src":"/gallery/DSC_4887.jpg","alt":"Photography","size":"large"},{"src":"/gallery/DSC_5071.jpg","alt":"Photography","size":"medium"},{"src":"/gallery/DSC_5278.jpg","alt":"Photography","size":"medium"},{"src":"/gallery/DSC_4915.jpg","alt":"Photography","size":"medium"},{"src":"/gallery/DSC_5266.jpg","alt":"Photography","size":"medium"},{"src":"/gallery/DSC_4888.jpg","alt":"Photography","size":"large"},{"src":"/gallery/DSC_4894.jpg","alt":"Photography","size":"large"},{"src":"/gallery/DSC_4980.jpg","alt":"Photography","size":"small"},{"src":"/gallery/DSC_5152.jpg","alt":"Photography","size":"small"},{"src":"/gallery/20260322_182940.jpg","alt":"Photography","size":"medium"},{"src":"/gallery/IMG_20250813_091240.jpg","alt":"Photography","size":"large"},{"src":"/gallery/IMG_20250923_114929.jpg","alt":"Photography","size":"small"},{"src":"/gallery/1766558246484.jpg","alt":"Photography","size":"small"}];
   const dialog = document.querySelector('.lightbox');
   const img = dialog?.querySelector('.lightbox-img');
   const counter = dialog?.querySelector('.lightbox-counter');

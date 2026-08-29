@@ -8,6 +8,18 @@ const { title, description = 'Portfolio — HyperZx2O' } = Astro.props;
 const currentPath = Astro.url.pathname;
 const base = import.meta.env.BASE_URL;
 
+const fontFaces = `
+  @font-face { font-family: 'Sigurd Variable'; src: url('${base}fonts/SigurdVariable.woff2') format('woff2'); font-weight: 100 900; font-display: swap; }
+  @font-face { font-family: 'Courier Prime'; src: url('${base}fonts/CourierPrime-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+  @font-face { font-family: 'Courier Prime'; src: url('${base}fonts/CourierPrime-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+  @font-face { font-family: 'Rules Variable'; src: url('${base}fonts/RulesVariable.woff2') format('woff2'); font-weight: 400 700; font-display: swap; }
+`;
+
+const grainCss = `
+  .grain-overlay { position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.035; background-image: url('${base}grain.svg'); background-repeat: repeat; background-size: 200px; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: 0.001s !important; transition-duration: 0.001s !important; } }
+`;
+
 const navItems = [
   { label: 'Home', href: base },
   { label: 'Projects', href: `${base}projects/` },
@@ -31,38 +43,15 @@ const navItems = [
   <title>{title}</title>
 
   <!-- Preload critical fonts -->
-  <link rel="preload" href="/fonts/SigurdVariable.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href={`${base}fonts/SigurdVariable.woff2`} as="font" type="font/woff2" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Fonts: self-hosted woff2 -->
-   <style is:inline>
-     @font-face {
-       font-family: 'Sigurd Variable';
-       src: url('/fonts/SigurdVariable.woff2') format('woff2');
-       font-weight: 100 900;
-       font-display: swap;
-     }
-     @font-face {
-       font-family: 'Courier Prime';
-       src: url('/fonts/CourierPrime-Regular.woff2') format('woff2');
-       font-weight: 400;
-       font-display: swap;
-     }
-     @font-face {
-       font-family: 'Courier Prime';
-       src: url('/fonts/CourierPrime-Bold.woff2') format('woff2');
-       font-weight: 700;
-       font-display: swap;
-     }
-      @font-face {
-        font-family: 'Rules Variable';
-        src: url('/fonts/RulesVariable.woff2') format('woff2');
-        font-weight: 400 700;
-        font-display: swap;
-      }
+   <style is:inline set:html={fontFaces} />
 
+   <style is:inline>
       /* Lenis smooth scroll */
       html.lenis,
       html.lenis body { height: auto; }
@@ -338,25 +327,9 @@ const navItems = [
       opacity: 1;
     }
 
-    /* Grain texture overlay */
-.grain-overlay {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.035;
-      background-image: url('/grain.svg');
-      background-repeat: repeat;
-      background-size: 200px;
-    }
-@media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after {
-        animation-duration: 0.001s !important;
-        transition-duration: 0.001s !important;
-      }
-    }
   </style>
+
+  <style is:inline set:html={grainCss} />
 
   <script>
     import Lenis from 'lenis';

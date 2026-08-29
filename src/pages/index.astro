@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
 ---
 <Layout title="HyperZx2O — Portfolio">
 
@@ -73,8 +74,8 @@ import Layout from '../layouts/Layout.astro';
           <div class="t-border-beam"></div>
           <div class="card-spotlight" aria-hidden="true"></div>
           <figure class="featured-preview">
-            <a href="/contextforge.jpg" class="img-link" aria-label="View full image">
-              <img src="/contextforge.jpg" alt="ContextForge knowledge graph interface" width="800" height="450" loading="lazy" decoding="async" />
+            <a href={`${base}contextforge.jpg`} class="img-link" aria-label="View full image">
+              <img src={`${base}contextforge.jpg`} alt="ContextForge knowledge graph interface" width="800" height="450" loading="lazy" decoding="async" />
             </a>
           </figure>
           <div class="featured-body-wrap">
@@ -113,8 +114,8 @@ import Layout from '../layouts/Layout.astro';
           <div class="t-border-beam"></div>
           <div class="card-spotlight" aria-hidden="true"></div>
           <figure class="featured-preview">
-            <a href="/win11guide.png" class="img-link" aria-label="View full image">
-              <img src="/win11guide.png" alt="Translucent Win11 glassmorphism desktop" width="800" height="450" loading="lazy" decoding="async" />
+            <a href={`${base}win11guide.png`} class="img-link" aria-label="View full image">
+              <img src={`${base}win11guide.png`} alt="Translucent Win11 glassmorphism desktop" width="800" height="450" loading="lazy" decoding="async" />
             </a>
           </figure>
           <div class="featured-body-wrap">
@@ -147,7 +148,7 @@ import Layout from '../layouts/Layout.astro';
         <div class="cp-float-wrap">
           <figure class="cp-card">
             <div class="cp-card-inner">
-              <img src="/profileCard.png" alt="Codeforces profile" width="600" height="400" loading="lazy" decoding="async" />
+              <img src={`${base}profileCard.png`} alt="Codeforces profile" width="600" height="400" loading="lazy" decoding="async" />
               <svg class="cp-card-grain" aria-hidden="true"><filter id="cp-noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#cp-noise)"/></svg>
             </div>
           </figure>
@@ -181,7 +182,7 @@ import Layout from '../layouts/Layout.astro';
         <div class="devcard-float-wrap">
           <figure class="stats-devcard devcard">
             <div class="devcard-inner">
-              <img src="/devCard.png" alt="GitHub stats" width="495" height="195" loading="lazy" decoding="async" />
+              <img src={`${base}devCard.png`} alt="GitHub stats" width="495" height="195" loading="lazy" decoding="async" />
               <svg class="devcard-grain" aria-hidden="true"><filter id="dc-noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#dc-noise)"/></svg>
             </div>
           </figure>
@@ -228,23 +229,23 @@ import Layout from '../layouts/Layout.astro';
   <!-- Photo Strip -->
   <section class="photostrip section reveal">
     <div class="photostrip-scroll">
-      <img src="/gallery/DSC_5278.jpg" alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src="/gallery/DSC_5266.jpg" alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src="/gallery/DSC_5152.jpg" alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src="/gallery/DSC_5071.jpg" alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src="/gallery/DSC_4980.jpg" alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src="/gallery/DSC_4915.jpg" alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src="/gallery/DSC_4894.jpg" alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src="/gallery/DSC_4888.jpg" alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src="/gallery/DSC_4887.jpg" alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src="/gallery/DSC_4823.jpg" alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src="/gallery/DSC_4796.jpg" alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src="/gallery/DSC_4786.jpg" alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src="/gallery/IMG_20250923_114929.jpg" alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src="/gallery/IMG_20250813_091240.jpg" alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src="/gallery/20260322_182940.jpg" alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src="/gallery/20260119_161651.jpg" alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src="/gallery/1766558246484.jpg" alt="" width="400" height="300" loading="lazy" decoding="async" />
+      <img src={`${base}gallery/DSC_5278.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
+      <img src={`${base}gallery/DSC_5266.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
+      <img src={`${base}gallery/DSC_5152.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
+      <img src={`${base}gallery/DSC_5071.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
+      <img src={`${base}gallery/DSC_4980.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
+      <img src={`${base}gallery/DSC_4915.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
+      <img src={`${base}gallery/DSC_4894.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
+      <img src={`${base}gallery/DSC_4888.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
+      <img src={`${base}gallery/DSC_4887.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
+      <img src={`${base}gallery/DSC_4823.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
+      <img src={`${base}gallery/DSC_4796.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
+      <img src={`${base}gallery/DSC_4786.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
+      <img src={`${base}gallery/IMG_20250923_114929.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
+      <img src={`${base}gallery/IMG_20250813_091240.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
+      <img src={`${base}gallery/20260322_182940.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
+      <img src={`${base}gallery/20260119_161651.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
+      <img src={`${base}gallery/1766558246484.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
     </div>
     <svg class="photostrip-noise" aria-hidden="true"><filter id="ps-noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#ps-noise)" opacity="0.08"/></svg>
   </section>
