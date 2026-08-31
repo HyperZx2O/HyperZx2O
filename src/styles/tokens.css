@@ -34,10 +34,16 @@
   /* Radius */
   --radius-full: 9999px;
 
+  /* Easing curves */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
   /* Transitions */
   --transition-instant: 0.001s ease;
-  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-smooth: 0.3s cubic-bezier(0, 0, 0.2, 1);
+  --transition-fast: 0.15s var(--ease-out);
+  --transition-medium: 0.2s var(--ease-out);
+  --transition-smooth: 0.2s var(--ease-out);
 }
 
 /* Reset */
@@ -94,7 +100,8 @@ ul, ol {
   font-weight: 300;
   line-height: 0.8;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: -0.02em;
+  font-optical-sizing: auto;
   overflow-wrap: anywhere;
   min-width: 0;
 }
@@ -105,7 +112,8 @@ ul, ol {
   font-weight: 300;
   line-height: 0.88;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: -0.02em;
+  font-optical-sizing: auto;
   overflow-wrap: anywhere;
   min-width: 0;
 }
@@ -116,6 +124,8 @@ ul, ol {
   font-weight: 300;
   line-height: 1;
   text-transform: uppercase;
+  letter-spacing: -0.02em;
+  font-optical-sizing: auto;
   overflow-wrap: anywhere;
   min-width: 0;
 }
@@ -164,7 +174,7 @@ ul, ol {
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 200ms var(--ease-out);
   background: radial-gradient(
     500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
     rgba(237, 255, 69, 0.06),
@@ -234,6 +244,35 @@ ul, ol {
   }
 }
 
+/* Reduced transparency — keep translucent chrome readable */
+@media (prefers-reduced-transparency: reduce) {
+  .site-header {
+    background: rgba(0, 0, 242, 0.97);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .img-dialog::backdrop,
+  .lightbox::backdrop {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(6, 6, 28, 0.85);
+  }
+}
+
+/* High contrast — define surfaces with visible boundaries */
+@media (prefers-contrast: more) {
+  .site-header {
+    border-bottom: 1px solid var(--color-accent);
+  }
+  .muted {
+    color: var(--color-text);
+  }
+  .section-tag {
+    color: var(--color-accent);
+  }
+}
+
+
 /* Shimmer text */
 @keyframes shimmer {
   0% { background-position: -200% center; }
@@ -264,25 +303,25 @@ ul, ol {
   opacity: 0;
 }
 .reveal.visible {
-  animation: reveal-up 0.6s cubic-bezier(0, 0, 0.2, 1) forwards;
+  animation: reveal-up 0.5s var(--ease-out) forwards;
 }
 
 /* Stagger children */
 .stagger > * { opacity: 0; }
-.stagger.visible > *:nth-child(1) { animation: reveal-up 0.5s 0.0s cubic-bezier(0,0,0.2,1) forwards; }
-.stagger.visible > *:nth-child(2) { animation: reveal-up 0.5s 0.08s cubic-bezier(0,0,0.2,1) forwards; }
-.stagger.visible > *:nth-child(3) { animation: reveal-up 0.5s 0.16s cubic-bezier(0,0,0.2,1) forwards; }
-.stagger.visible > *:nth-child(4) { animation: reveal-up 0.5s 0.24s cubic-bezier(0,0,0.2,1) forwards; }
-.stagger.visible > *:nth-child(5) { animation: reveal-up 0.5s 0.32s cubic-bezier(0,0,0.2,1) forwards; }
-.stagger.visible > *:nth-child(6) { animation: reveal-up 0.5s 0.40s cubic-bezier(0,0,0.2,1) forwards; }
-.stagger.visible > *:nth-child(7) { animation: reveal-up 0.5s 0.48s cubic-bezier(0,0,0.2,1) forwards; }
-.stagger.visible > *:nth-child(8) { animation: reveal-up 0.5s 0.56s cubic-bezier(0,0,0.2,1) forwards; }
-.stagger.visible > *:nth-child(9) { animation: reveal-up 0.5s 0.64s cubic-bezier(0,0,0.2,1) forwards; }
-.stagger.visible > *:nth-child(10) { animation: reveal-up 0.5s 0.72s cubic-bezier(0,0,0.2,1) forwards; }
+.stagger.visible > *:nth-child(1) { animation: reveal-up 0.5s 0.0s var(--ease-out) forwards; }
+.stagger.visible > *:nth-child(2) { animation: reveal-up 0.5s 0.06s var(--ease-out) forwards; }
+.stagger.visible > *:nth-child(3) { animation: reveal-up 0.5s 0.12s var(--ease-out) forwards; }
+.stagger.visible > *:nth-child(4) { animation: reveal-up 0.5s 0.18s var(--ease-out) forwards; }
+.stagger.visible > *:nth-child(5) { animation: reveal-up 0.5s 0.24s var(--ease-out) forwards; }
+.stagger.visible > *:nth-child(6) { animation: reveal-up 0.5s 0.30s var(--ease-out) forwards; }
+.stagger.visible > *:nth-child(7) { animation: reveal-up 0.5s 0.36s var(--ease-out) forwards; }
+.stagger.visible > *:nth-child(8) { animation: reveal-up 0.5s 0.42s var(--ease-out) forwards; }
+.stagger.visible > *:nth-child(9) { animation: reveal-up 0.5s 0.48s var(--ease-out) forwards; }
+.stagger.visible > *:nth-child(10) { animation: reveal-up 0.5s 0.54s var(--ease-out) forwards; }
 
 /* Card stack hover */
 .stack-hover {
-  transition: transform 0.25s cubic-bezier(0, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0, 0, 0.2, 1);
+  transition: transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
 }
 .stack-hover:hover {
   transform: translateY(-4px);
@@ -364,7 +403,7 @@ ul, ol {
   border-radius: inherit;
   overflow: hidden;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 200ms var(--ease-out);
 }
 .t-border-beam::before {
   content: '';
@@ -416,9 +455,9 @@ ul, ol {
   transform: translateX(-50%) translateY(0) scale(1);
   filter: blur(0);
   transition:
-    opacity 350ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 350ms cubic-bezier(0.22, 1, 0.36, 1),
-    filter 350ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 250ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 250ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 250ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* ── Confetti ──────────────────────────────────────────────────── */
@@ -513,13 +552,13 @@ ul, ol {
   }
 }
 .hero-name {
-  animation: hero-reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both,
+  animation: hero-reveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both,
              shimmer 4s linear 1s infinite;
 }
 
 /* ── Animation: filter transition ──────────────────────── */
 .project-card {
-  transition: border-color var(--transition-instant), opacity 0.3s ease, transform 0.3s ease, scale 0.3s ease;
+  transition: border-color var(--transition-instant), opacity 250ms var(--ease-out), transform 250ms var(--ease-out), scale 250ms var(--ease-out);
   contain: layout style paint;
 }
 .project-card[data-hidden="true"] {
@@ -536,7 +575,7 @@ ul, ol {
 @keyframes bento-reveal {
   0% {
     opacity: 0;
-    transform: scale(0.9);
+    transform: scale(0.92);
   }
   100% {
     opacity: 1;
@@ -544,7 +583,7 @@ ul, ol {
   }
 }
 .bento-item {
-  animation: bento-reveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: bento-reveal 0.4s cubic-bezier(0.23, 1, 0.32, 1) both;
   animation-delay: calc(var(--i) * 0.05s);
 }
 

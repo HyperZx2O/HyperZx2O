@@ -67,6 +67,12 @@ const navItems = [
         transition-duration: 1ms;
         transition-behavior: allow-discrete;
       }
+
+      /* Hard scroll lock when a modal is open (belt-and-braces behind Lenis stop) */
+      html.scroll-locked,
+      html.scroll-locked body {
+        overflow: hidden;
+      }
    </style>
 </head>
 <body>
@@ -246,7 +252,7 @@ const navItems = [
         background: var(--color-primary);
         border-left: 1px solid var(--color-border-subtle);
         transform: translateX(100%);
-        transition: transform var(--transition-smooth);
+        transition: transform 250ms var(--ease-drawer);
       }
       .nav-links[data-open="true"] {
         transform: translateX(0);
@@ -312,7 +318,7 @@ const navItems = [
       align-items: center;
       gap: var(--space-md);
       z-index: 100;
-      animation: reveal-up 0.6s cubic-bezier(0, 0, 0.2, 1) forwards;
+      animation: reveal-up 0.5s var(--ease-out) forwards;
     }
     .welcome-hint[hidden] {
       display: none;
@@ -344,6 +350,23 @@ const navItems = [
     lenis.scrollTo(0, { immediate: true });
 
     window.addEventListener('resize', () => lenis.resize());
+
+    // --- Global scroll lock (refcounted) for modals/dialogs ---
+    // Stops Lenis AND hard-locks scroll so the background can't move behind
+    // open dialogs. Refcount lets multiple stacked locks release cleanly.
+    let scrollLockCount = 0;
+    (window as any).__lockScroll = function() {
+      scrollLockCount++;
+      lenis.stop();
+      document.documentElement.classList.add('scroll-locked');
+    };
+    (window as any).__unlockScroll = function() {
+      scrollLockCount = Math.max(0, scrollLockCount - 1);
+      if (scrollLockCount === 0) {
+        lenis.start();
+        document.documentElement.classList.remove('scroll-locked');
+      }
+    };
 
     // --- Scroll-to-link handling ---
     document.addEventListener('click', (e) => {
@@ -459,8 +482,7 @@ const navItems = [
       const cy = rect.top + rect.height / 2;
       const dx = (e.clientX - cx) / (rect.width / 2);
       const dy = (e.clientY - cy) / (rect.height / 2);
-      card.style.setProperty('--tilt-x', `${dy * 6}deg`);
-      card.style.setProperty('--tilt-y', `${-dx * 6}deg`);
+      card.__tiltTarget = { x: `${dy * 6}deg`, y: `${-dx * 6}deg` };
       const mx = ((e.clientX - rect.left) / rect.width) * 100;
       const my = ((e.clientY - rect.top) / rect.height) * 100;
       card.style.setProperty('--mouse-x', `${mx}%`);
@@ -468,8 +490,85 @@ const navItems = [
     };
     (window as any).resetTilt = function(e: MouseEvent) {
       const card = e.currentTarget as HTMLElement;
-      card.style.setProperty('--tilt-x', '0deg');
-      card.style.setProperty('--tilt-y', '0deg');
+      card.__tiltTarget = { x: '0deg', y: '0deg' };
+    };
+
+    // Spring-driven tilt (velocity-aware + interruptible). Each axis is an
+    // independent critically-damped spring: stiffness + damping shape the
+    // feel, and velocity is carried through target changes so a reversal
+    // (e.g. flicking out of the card) decelerates fluidly instead of snapping.
+    const tiltCards = Array.from(document.querySelectorAll<HTMLElement>(
+      '.featured-card, .cp-card, .devcard, .project-card, .guide-card, .timeline-card'
+    ));
+    interface TiltState {
+      x: string;
+      y: string;
+    }
+    interface SpringState {
+      pos: number;
+      vel: number;
+    }
+    const stiffness = 170;   // responsiveness
+    const damping = 18;      // 0.75 * 2*sqrt(stiffness) ≈ critical damping (~fluid, no overshoot)
+    const springState = new WeakMap<HTMLElement, { x: SpringState; y: SpringState }>();
+    function parseDeg(v: string): number {
+      return parseFloat(v) || 0;
+    }
+    function springStep(s: SpringState, target: number, dt: number) {
+      const a = (-stiffness * (s.pos - target)) - (damping * s.vel);
+      s.vel += a * dt;
+      s.pos += s.vel * dt;
+    }
+    let tiltRaf = 0;
+    let lastTiltT = performance.now();
+    function tiltLoop() {
+      const now = performance.now();
+      const dt = Math.min((now - lastTiltT) / 1000, 0.05); // clamp sub-steps
+      lastTiltT = now;
+      let anyActive = false;
+      tiltCards.forEach(card => {
+        const target = (card as any).__tiltTarget as TiltState | undefined;
+        const state = springState.get(card);
+        if (!state) {
+          springState.set(card, {
+            x: { pos: parseDeg(card.style.getPropertyValue('--tilt-x')), vel: 0 },
+            y: { pos: parseDeg(card.style.getPropertyValue('--tilt-y')), vel: 0 }
+          });
+          return;
+        }
+        const tx = parseDeg((target as any)?.x);
+        const ty = parseDeg((target as any)?.y);
+        springStep(state.x, tx || 0, dt);
+        springStep(state.y, ty || 0, dt);
+        if (Math.abs(state.x.pos - tx) > 0.01 || Math.abs(state.y.pos - ty) > 0.01) {
+          anyActive = true;
+        }
+        card.style.setProperty('--tilt-x', `${state.x.pos}deg`);
+        card.style.setProperty('--tilt-y', `${state.y.pos}deg`);
+      });
+      // Run continuously while any spring is in motion; pause when settled
+      if (anyActive) {
+        tiltRaf = requestAnimationFrame(tiltLoop);
+      } else {
+        tiltRaf = 0;
+      }
+    }
+    function startTiltLoop() {
+      if (!tiltRaf) {
+        lastTiltT = performance.now();
+        tiltRaf = requestAnimationFrame(tiltLoop);
+      }
+    }
+    // Kick the spring loop whenever a target is set or reset
+    const origApply = (window as any).applyTilt;
+    (window as any).applyTilt = function(e: MouseEvent) {
+      origApply.call(this, e);
+      startTiltLoop();
+    };
+    const origReset = (window as any).resetTilt;
+    (window as any).resetTilt = function(e: MouseEvent) {
+      origReset.call(this, e);
+      startTiltLoop();
     };
   </script>
 </body>

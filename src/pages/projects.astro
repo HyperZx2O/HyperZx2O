@@ -101,7 +101,7 @@ const categoryLabels = Object.fromEntries(
     bottom: 0;
     height: 2px;
     background: var(--color-accent);
-    transition: left 0.3s cubic-bezier(0, 0, 0.2, 1), width 0.3s cubic-bezier(0, 0, 0.2, 1);
+    transition: left 200ms var(--ease-out), width 200ms var(--ease-out);
     pointer-events: none;
   }
   .filter-chip {
@@ -149,8 +149,8 @@ const categoryLabels = Object.fromEntries(
     transition:
       border-color var(--transition-instant),
       transform var(--transition-fast),
-      opacity 0.3s ease,
-      scale 0.3s ease;
+      opacity 250ms var(--ease-out),
+      scale 250ms var(--ease-out);
   }
   .project-card[data-hidden="true"] {
     opacity: 0;

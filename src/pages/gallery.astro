@@ -138,13 +138,15 @@ const photosJs = JSON.stringify(photos.map(p => ({ ...p, src: base + p.src })));
     color: var(--color-text);
     z-index: 200;
     opacity: 0;
-    transition: opacity 200ms ease-out;
+    transition: opacity 200ms var(--ease-out);
   }
   .lightbox[open] {
     opacity: 1;
   }
   .lightbox::backdrop {
-    background: transparent;
+    background: rgba(6, 6, 28, 0.6);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
   }
 
   .lightbox-figure {
@@ -163,7 +165,7 @@ const photosJs = JSON.stringify(photos.map(p => ({ ...p, src: base + p.src })));
     border-radius: 2px;
     opacity: 0;
     transform: scale(0.95);
-    transition: opacity 250ms ease-out, transform 250ms ease-out;
+    transition: opacity 250ms var(--ease-out), transform 250ms var(--ease-out);
   }
   .lightbox[open] .lightbox-img {
     opacity: 1;
@@ -288,12 +290,27 @@ const photosJs = JSON.stringify(photos.map(p => ({ ...p, src: base + p.src })));
     }
   }
 
-  function open(index) {
+  function open(index, originRect) {
     current = index;
     lastFocused = document.activeElement;
     update();
     dialog.showModal();
+    // Anchor the zoom origin to the tapped thumb so the image appears to
+    // emanate from where the user tapped (Apple §7 — anchored origins).
+    if (originRect) {
+      var vp = { w: window.innerWidth, h: window.innerHeight };
+      var cx = originRect.left + originRect.width / 2;
+      var cy = originRect.top + originRect.height / 2;
+      img.style.transformOrigin = (cx / vp.w * 100) + '% ' + (cy / vp.h * 100) + '% ';
+      // Compensate for the figure's centering with a translate from the thumb center
+      img.style.transform = 'scale(0.3) translate(' +
+        ((cx - vp.w / 2) / (0.3)) + 'px, ' + ((cy - vp.h / 2) / (0.3)) + 'px)';
+      // force reflow then snap to full
+      void img.offsetWidth;
+      img.style.transform = 'scale(1) translate(0,0)';
+    }
     document.body.style.overflow = 'hidden';
+    if (window.__lockScroll) window.__lockScroll();
     closeBtn?.focus();
     dialog.addEventListener('keydown', trapFocus);
   }
@@ -304,6 +321,11 @@ const photosJs = JSON.stringify(photos.map(p => ({ ...p, src: base + p.src })));
     dialog.removeEventListener('keydown', trapFocus);
     if (lastFocused) lastFocused.focus();
   }
+
+  // Unlock scroll on ANY close path (button, backdrop click, Escape, programmatic)
+  dialog?.addEventListener('close', function() {
+    if (window.__unlockScroll) window.__unlockScroll();
+  });
 
   function update() {
     const photo = photos[current];
@@ -325,7 +347,8 @@ const photosJs = JSON.stringify(photos.map(p => ({ ...p, src: base + p.src })));
   items.forEach(function(item) {
     item.addEventListener('click', function() {
       var index = Number(item.getAttribute('data-index'));
-      open(index);
+      var rect = item.getBoundingClientRect();
+      open(index, rect);
     });
   });
 
@@ -338,6 +361,8 @@ const photosJs = JSON.stringify(photos.map(p => ({ ...p, src: base + p.src })));
   });
 
   closeBtn?.addEventListener('click', close);
+  prevBtn?.addEventListener('click', prev);
+  nextBtn?.addEventListener('click', next);
 
   dialog?.addEventListener('click', function(e) {
     if (e.target === dialog) close();
@@ -350,16 +375,21 @@ const photosJs = JSON.stringify(photos.map(p => ({ ...p, src: base + p.src })));
 
   var touchStartX = 0;
   var touchStartY = 0;
+  var touchStartTime = 0;
 
   dialog?.addEventListener('touchstart', function(e) {
     touchStartX = e.touches[0].clientX;
     touchStartY = e.touches[0].clientY;
+    touchStartTime = Date.now();
   }, { passive: true });
-
   dialog?.addEventListener('touchend', function(e) {
     var dx = e.changedTouches[0].clientX - touchStartX;
     var dy = e.changedTouches[0].clientY - touchStartY;
-    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+    var dt = Date.now() - touchStartTime || 1;
+    var velocity = Math.abs(dx) / dt; // px/ms → flick = fast short swipe
+    var isHorizontal = Math.abs(dx) > Math.abs(dy);
+    // Advance on physical distance OR a quick flick (velocity-based), per fluid gesture principles
+    if (isHorizontal && dx !== 0 && (Math.abs(dx) > 50 || velocity > 0.4)) {
       if (dx > 0) prev();
       else next();
     }
