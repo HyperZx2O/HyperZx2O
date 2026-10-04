@@ -8,6 +8,7 @@ const base = import.meta.env.BASE_URL;
   <section class="hero">
     <div class="hero-grid-bg" aria-hidden="true"></div>
     <div class="hero-shapes" aria-hidden="true">
+      <img src={`${base}icons/favicon-a-favicon.svg`} alt="" aria-hidden="true" class="hero-ghost" />
       <span class="hero-shape hero-shape--1"></span>
       <span class="hero-shape hero-shape--2"></span>
       <span class="hero-shape hero-shape--3"></span>
@@ -73,11 +74,10 @@ const base = import.meta.env.BASE_URL;
         <article class="featured-card featured-card--wide t-border-beam-on min-w-0 card-spotlight-active">
           <div class="t-border-beam"></div>
           <div class="card-spotlight" aria-hidden="true"></div>
-          <figure class="featured-preview">
-            <a href={`${base}contextforge.jpg`} class="img-link" aria-label="View full image">
-              <img src={`${base}contextforge.jpg`} alt="ContextForge knowledge graph interface" width="800" height="450" loading="lazy" decoding="async" />
-            </a>
-          </figure>
+          <div class="featured-glyph" aria-hidden="true">
+            <span class="featured-index">01</span>
+            <span class="featured-glyph-row"><i class="g-diamond"></i><i class="g-dot"></i><i class="g-hollow"></i><i class="g-dot"></i><i class="g-hex"></i></span>
+          </div>
           <div class="featured-body-wrap">
             <span class="featured-label mono-label">RESEARCH TOOL</span>
             <h3 class="heading-2">ContextForge</h3>
@@ -113,11 +113,10 @@ const base = import.meta.env.BASE_URL;
         <article class="featured-card featured-card--compact t-border-beam-on min-w-0 card-spotlight-active">
           <div class="t-border-beam"></div>
           <div class="card-spotlight" aria-hidden="true"></div>
-          <figure class="featured-preview">
-            <a href={`${base}win11guide.png`} class="img-link" aria-label="View full image">
-              <img src={`${base}win11guide.png`} alt="Translucent Win11 glassmorphism desktop" width="800" height="450" loading="lazy" decoding="async" />
-            </a>
-          </figure>
+          <div class="featured-glyph" aria-hidden="true">
+            <span class="featured-index">02</span>
+            <span class="featured-glyph-row"><i class="g-bar"></i><i class="g-dot"></i><i class="g-bar"></i><i class="g-dot"></i><i class="g-bar"></i></span>
+          </div>
           <div class="featured-body-wrap">
             <span class="featured-label mono-label">COMMUNITY GUIDE</span>
             <h3 class="heading-2">Translucent Win11</h3>
@@ -141,53 +140,31 @@ const base = import.meta.env.BASE_URL;
     </div>
   </section>
 
-  <!-- Competitive Programming -->
-  <section class="cp section reveal">
+  <!-- Proof: story + numbers in one band -->
+  <section class="signal section reveal">
     <div class="container">
-      <div class="cp-grid">
-        <div class="cp-float-wrap">
-          <figure class="cp-card card-spotlight-active">
-            <div class="cp-card-inner">
-              <img src={`${base}profileCard.png`} alt="Codeforces profile" width="600" height="400" loading="lazy" decoding="async" />
-              <svg class="cp-card-grain" aria-hidden="true"><filter id="cp-noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#cp-noise)"/></svg>
-            </div>
-          </figure>
+      <p class="section-tag mono-label">Proof</p>
+      <h2 class="display-md">Pressure tested.</h2>
+      <p class="signal-body">I was never really into competitive programming. Then my Structured Programming professor dropped a Codeforces contest with 150 problems as a quiz. I got through 65 plus of them. Don't do much anymore, but that pressure is exactly what I chase during hackathons now.</p>
+      <div class="signal-stats stagger">
+        <div class="signal-stat">
+          <span class="signal-num">13</span>
+          <span class="signal-label mono-label">Projects</span>
         </div>
-        <div class="cp-text">
-          <p class="section-tag mono-label">Competitive Programming</p>
-          <p class="cp-body">I was never really into competitive programming. Then my Structured Programming professor dropped a Codeforces contest with 150 problems as a quiz. I got through 65 plus of them. Don't do much anymore, but that pressure is exactly what I chase during hackathons now.</p>
+        <div class="signal-stat">
+          <span class="signal-num">6</span>
+          <span class="signal-label mono-label">Hackathons</span>
+        </div>
+        <div class="signal-stat">
+          <span class="signal-num">140+</span>
+          <span class="signal-label mono-label">Stars Earned</span>
+        </div>
+        <div class="signal-stat">
+          <span class="signal-num">65+</span>
+          <span class="signal-label mono-label">Problems Cleared</span>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Stats -->
-  <section class="stats section reveal">
-    <div class="container">
-      <div class="stats-grid">
-        <div class="stats-col stagger">
-          <div class="stat-card">
-            <span class="stat-number display-md">10</span>
-            <span class="stat-label mono-label">Projects</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-number display-md">6</span>
-            <span class="stat-label mono-label">Hackathons</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-number display-md">140+</span>
-            <span class="stat-label mono-label">Stars Earned</span>
-          </div>
-        </div>
-        <div class="devcard-float-wrap">
-          <figure class="stats-devcard devcard card-spotlight-active">
-            <div class="devcard-inner">
-              <img src={`${base}devCard.png`} alt="GitHub stats" width="495" height="195" loading="lazy" decoding="async" />
-              <svg class="devcard-grain" aria-hidden="true"><filter id="dc-noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#dc-noise)"/></svg>
-            </div>
-          </figure>
-        </div>
-      </div>
+      <a class="signal-link mono-label" href="https://codeforces.com/profile/hyperzx20" target="_blank" rel="noopener">Codeforces →</a>
     </div>
   </section>
 
@@ -278,16 +255,9 @@ const base = import.meta.env.BASE_URL;
 
   <div class="t-toast" aria-live="polite">Email copied!</div>
 
-  <dialog class="img-dialog" aria-label="Full image view">
-    <button class="img-dialog-close" aria-label="Close">&times;</button>
-    <figure class="img-dialog-figure">
-      <img class="img-dialog-img" src="" alt="" />
-    </figure>
-  </dialog>
-
   <script is:inline>
     // Cursor‑reactive tilt + spotlight for featured cards
-    const tiltCards = document.querySelectorAll('.featured-card, .cp-card, .devcard');
+    const tiltCards = document.querySelectorAll('.featured-card');
     tiltCards.forEach(card => {
       card.addEventListener('mousemove', (e) => (window as any).applyTilt(e));
       card.addEventListener('mouseleave', (e) => (window as any).resetTilt(e));
@@ -322,6 +292,20 @@ const base = import.meta.env.BASE_URL;
     position: absolute;
     inset: 0;
     pointer-events: none;
+  }
+  .hero-ghost {
+    position: absolute;
+    right: -70px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: min(440px, 65vw);
+    height: auto;
+    opacity: 0.07;
+  }
+  @media (max-width: 767px) {
+    .hero-ghost {
+      display: none;
+    }
   }
   .hero-shape {
     position: absolute;
@@ -671,9 +655,6 @@ const base = import.meta.env.BASE_URL;
     .featured-card--wide {
       grid-row: span 1;
     }
-    .featured-card--wide .featured-preview img {
-      min-height: 320px;
-    }
   }
 
   /* Compact card (bento: right column) */
@@ -681,24 +662,72 @@ const base = import.meta.env.BASE_URL;
     background: linear-gradient(225deg, rgba(255,255,255,0.02) 0%, transparent 60%);
   }
 
-  /* Featured preview image */
-  .featured-preview {
+  /* Featured glyph masthead (typographic, no images) */
+  .featured-glyph {
     margin: calc(-1 * var(--space-xl)) calc(-1 * var(--space-xl)) 0;
-    overflow: hidden;
+    padding: var(--space-xl);
     border-bottom: 1px solid var(--color-border-subtle);
-    position: relative;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    overflow: hidden;
   }
-  .featured-preview img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    display: block;
-    transition: transform 200ms var(--ease-out);
-    filter: saturate(0.85);
+  .featured-index {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 300;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--color-accent);
   }
-  .featured-card:hover .featured-preview img {
-    transform: scale(1.03);
-    filter: saturate(1);
+  .featured-glyph-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.1rem;
+    white-space: nowrap;
+  }
+  .featured-glyph-row i {
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .g-diamond {
+    width: 12px;
+    height: 12px;
+    background: var(--color-accent);
+    transform: rotate(45deg);
+  }
+  .g-hollow {
+    width: 11px;
+    height: 11px;
+    border: 1.5px solid var(--color-accent);
+    transform: rotate(45deg);
+  }
+  .g-hex {
+    width: 13px;
+    height: 13px;
+    border: 1.5px solid var(--color-accent);
+    border-radius: 50%;
+    outline: 1.5px solid var(--color-accent);
+    outline-offset: 2.5px;
+  }
+  .g-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-text-muted);
+  }
+  .g-bar {
+    width: 22px;
+    height: 8px;
+    background: repeating-linear-gradient(
+      -55deg,
+      var(--color-accent) 0 2px,
+      transparent 2px 5px
+    );
+  }
+  .featured-card:hover .g-dot {
+    background: var(--color-accent);
   }
 
   .featured-label {
@@ -795,280 +824,49 @@ const base = import.meta.env.BASE_URL;
     font-size: var(--text-xs);
   }
 
-  /* Image link + dialog */
-  .img-link {
-    display: block;
-    cursor: zoom-in;
+  /* Signal — story + numbers in one band */
+  .signal .display-md {
+    margin-bottom: var(--space-lg);
   }
-  .img-dialog {
-    position: fixed;
-    inset: 0;
-    width: 100vw;
-    height: 100dvh;
-    max-width: none;
-    max-height: none;
-    margin: 0;
-    padding: 0;
-    border: none;
-    background: rgba(0, 0, 242, 0.92);
-    color: var(--color-text);
-    z-index: 200;
-    opacity: 0;
-    transition: opacity 200ms var(--ease-out);
-  }
-  .img-dialog[open] {
-    opacity: 1;
-  }
-  .img-dialog::backdrop {
-    background: rgba(6, 6, 28, 0.6);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
-  }
-  .img-dialog-figure {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-    padding: var(--space-3xl) var(--space-4xl);
-  }
-  .img-dialog-img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    border-radius: 2px;
-    opacity: 0;
-    transform: scale(0.95);
-    transition: opacity 250ms var(--ease-out), transform 250ms var(--ease-out);
-  }
-  .img-dialog[open] .img-dialog-img {
-    opacity: 1;
-    transform: scale(1);
-  }
-  .img-dialog-close {
-    position: fixed;
-    top: var(--space-lg);
-    right: var(--space-lg);
-    background: none;
-    border: none;
-    color: var(--color-text-muted);
-    font-family: var(--font-mono);
-    font-size: 1.5rem;
-    cursor: pointer;
-    z-index: 201;
-    padding: var(--space-md);
-    line-height: 1;
-    transition: color var(--transition-instant);
-  }
-  .img-dialog-close:hover,
-  .img-dialog-close:focus-visible {
-    color: var(--color-text);
-  }
-  .img-dialog-close:focus-visible {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 2px;
-  }
-
-  /* Competitive Programming */
-  .cp-grid {
-    display: grid;
-    gap: var(--space-2xl);
-    align-items: center;
-  }
-  @media (min-width: 768px) {
-    .cp-grid {
-      grid-template-columns: 1fr 4fr;
-      gap: var(--space-3xl);
-    }
-  }
-  .cp-card {
-    margin: 0;
-    border: none;
-    overflow: visible;
-    position: relative;
-    padding: 2px;
-    background: conic-gradient(from var(--cp-border-angle, 0deg), transparent 60%, var(--color-accent) 80%, transparent 100%);
-    animation: cp-border-spin 4s linear infinite;
-    perspective: 600px;
-    transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
-    transition: transform var(--transition-fast);
-  }
-  .cp-float-wrap {
-    animation: cp-float 6s var(--ease-in-out) infinite;
-    width: 100%;
-  }
-  .cp-card::before {
-    content: '';
-    position: absolute;
-    inset: -20px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(237, 255, 69, 0.08) 0%, transparent 70%);
-    filter: blur(20px);
-    z-index: -1;
-    animation: cp-pulse 4s ease-in-out infinite alternate;
-  }
-  .cp-card-inner {
-    display: block;
-    overflow: hidden;
-    background: var(--color-bg);
-    position: relative;
-    max-width: 300px;
-  }
-  .cp-card img {
-    width: 100%;
-    height: auto;
-    display: block;
-    filter: saturate(0.9);
-    transition: filter 200ms var(--ease-out), transform 200ms var(--ease-out);
-  }
-  .cp-card:hover img {
-    filter: saturate(1);
-    transform: scale(1.05);
-  }
-  /* Grain overlay on image */
-  .cp-card-grain {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0.06;
-    mix-blend-mode: overlay;
-  }
-
-  @keyframes cp-float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-  }
-  @keyframes cp-border-spin {
-    to { --cp-border-angle: 360deg; }
-  }
-  @property --cp-border-angle {
-    syntax: '<angle>';
-    inherits: false;
-    initial-value: 0deg;
-  }
-  @keyframes cp-pulse {
-    0% { opacity: 0.5; transform: scale(1); }
-    100% { opacity: 1; transform: scale(1.05); }
-  }
-  .cp-text {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
-  }
-  .cp-body {
+  .signal-body {
     color: var(--color-text-muted);
     font-size: var(--text-lg);
     line-height: 1.7;
+    max-width: 62ch;
+    margin-bottom: var(--space-3xl);
   }
-
-  /* Stats */
-  .stats-grid {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2xl);
-    align-items: center;
-  }
-  @media (min-width: 768px) {
-    .stats-grid {
-      flex-direction: row;
-      gap: var(--space-3xl);
-    }
-  }
-  .stats-col {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
-    flex: 1;
-    justify-content: center;
+  .signal-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
   }
   @media (min-width: 768px) {
-    .stats-col {
-      gap: var(--space-xl);
+    .signal-stats {
+      grid-template-columns: repeat(4, 1fr);
     }
   }
-  .stat-card {
+  .signal-stat {
+    border-top: 2px solid var(--color-accent);
+    padding-top: var(--space-lg);
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: var(--space-sm);
-    padding: var(--space-2xl) var(--space-lg);
-    border: 1px solid var(--color-border-subtle);
-    text-align: center;
   }
-  .stat-number {
-    color: var(--color-accent);
+  .signal-num {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 300;
     line-height: 1;
+    color: var(--color-text);
   }
-  .stat-label {
+  .signal-label {
     color: var(--color-text-muted);
   }
-  .stats-devcard {
-    margin: 0;
-    flex: 0 0 auto;
-  }
-  .devcard-float-wrap {
-    animation: cp-float 7s var(--ease-in-out) infinite;
-    max-width: 260px;
-  }
-  .devcard {
-    margin: 0;
-    border: none;
-    overflow: visible;
-    position: relative;
-    padding: 2px;
-    background: conic-gradient(from var(--dc-border-angle, 0deg), transparent 60%, var(--color-accent) 80%, transparent 100%);
-    animation: dc-border-spin 5s linear infinite;
-    perspective: 600px;
-    transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
-    transition: transform var(--transition-fast);
-  }
-  .devcard::before {
-    content: '';
-    position: absolute;
-    inset: -20px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(237, 255, 69, 0.08) 0%, transparent 70%);
-    filter: blur(20px);
-    z-index: -1;
-    animation: cp-pulse 5s ease-in-out infinite alternate;
-  }
-  .devcard-inner {
-    display: block;
-    overflow: hidden;
-    background: var(--color-bg);
-    position: relative;
-    max-width: 300px;
-  }
-  .stats-devcard img,
-  .devcard img {
-    width: 100%;
-    max-width: 495px;
-    height: auto;
-    display: block;
-    filter: saturate(0.9);
-    transition: filter 200ms var(--ease-out), transform 200ms var(--ease-out);
-  }
-  .devcard:hover img {
-    filter: saturate(1);
-    transform: scale(1.05);
-  }
-  .devcard-grain {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0.06;
-    mix-blend-mode: overlay;
-  }
-  @keyframes dc-border-spin {
-    to { --dc-border-angle: 360deg; }
-  }
-  @property --dc-border-angle {
-    syntax: '<angle>';
-    inherits: false;
-    initial-value: 0deg;
+  .signal-link {
+    display: inline-block;
+    margin-top: var(--space-2xl);
+    color: var(--color-accent);
+    font-size: var(--text-xs);
   }
 
   /* Timeline */
@@ -1093,6 +891,24 @@ const base = import.meta.env.BASE_URL;
     opacity: 1 !important;
     animation: none !important;
   }
+  @media (min-width: 768px) {
+    .timeline-track {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-2xl);
+      padding-left: 0;
+      padding-top: 28px;
+    }
+    .timeline-line {
+      left: 0;
+      right: 0;
+      top: 7px;
+      bottom: auto;
+      width: auto;
+      height: 1px;
+      background: linear-gradient(to right, var(--color-accent), var(--color-border-subtle) 60%, transparent);
+    }
+  }
   .timeline-node {
     position: relative;
     padding-bottom: var(--space-3xl);
@@ -1116,6 +932,16 @@ const base = import.meta.env.BASE_URL;
     border: 2px solid var(--color-accent);
     background: var(--color-bg);
     transition: box-shadow var(--transition-fast);
+  }
+  @media (min-width: 768px) {
+    .timeline-node {
+      padding-bottom: 0;
+      padding-left: 0;
+    }
+    .timeline-dot {
+      left: 0;
+      top: -28px;
+    }
   }
   .timeline-node:hover .timeline-dot {
     box-shadow: 0 0 12px var(--color-accent);
@@ -1442,8 +1268,7 @@ const base = import.meta.env.BASE_URL;
 
   /* Section transitions — subtle gradient fades */
   .featured::before,
-  .cp::before,
-  .stats::before,
+  .signal::before,
   .timeline::before,
   .photostrip::before,
   .contact::before {
@@ -1459,18 +1284,11 @@ const base = import.meta.env.BASE_URL;
     .featured-stat-num {
       font-size: clamp(1.5rem, 6vw, 2.5rem);
     }
-    .img-dialog-figure {
+    .featured-glyph {
       padding: var(--space-lg);
-    }
-    .stat-card {
-      padding: var(--space-xl) var(--space-md);
     }
     .cta-button {
       padding: var(--space-md) var(--space-xl);
-    }
-    .cp-card-inner,
-    .devcard-inner {
-      max-width: 220px;
     }
   }
 
@@ -1481,12 +1299,6 @@ const base = import.meta.env.BASE_URL;
     .hero-blob { animation: none !important; opacity: 1 !important; }
     .contact-tri { animation: none !important; opacity: 1 !important; }
     .contact-blob { animation: none !important; opacity: 1 !important; }
-    .cp-card { animation: none !important; }
-    .cp-card::before { animation: none !important; }
-    .cp-float-wrap { animation: none !important; }
-    .devcard-float-wrap { animation: none !important; }
-    .devcard { animation: none !important; }
-    .devcard::before { animation: none !important; }
   }
 </style>
 
@@ -1550,24 +1362,4 @@ const base = import.meta.env.BASE_URL;
     }
   });
 
-  // Image dialog
-  const imgDialog = document.querySelector('.img-dialog') as HTMLDialogElement;
-  const imgDialogImg = document.querySelector('.img-dialog-img') as HTMLImageElement;
-  const imgDialogClose = document.querySelector('.img-dialog-close');
-  document.querySelectorAll('.img-link').forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const href = (link as HTMLAnchorElement).href;
-      imgDialogImg.src = href;
-      imgDialogImg.alt = (link.querySelector('img') as HTMLImageElement)?.alt || '';
-      imgDialog.showModal();
-      (window as any).__lockScroll?.();
-    });
-  });
-  imgDialogClose?.addEventListener('click', () => imgDialog.close());
-  imgDialog?.addEventListener('click', (e) => {
-    if (e.target === imgDialog) imgDialog.close();
-  });
-  // Unlock scroll on ANY close path (button, backdrop click, Escape, programmatic)
-  imgDialog?.addEventListener('close', () => (window as any).__unlockScroll?.());
 </script>

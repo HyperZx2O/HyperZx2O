@@ -1,25 +1,35 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import hackathons from '../content/hackathons.json';
+
+const isWin = (status: string) => status !== "didn't qualify" && status !== 'pending';
+const winCount = hackathons.filter((h) => isWin(h.status)).length;
 ---
 <Layout title="Events — HyperZx2O">
 
   <section class="events-hero section">
     <div class="container">
-      <p class="section-tag mono-label">Track Record</p>
+      <p class="section-tag mono-label">Stages</p>
       <h1 class="display-md">Events</h1>
-      <p class="body-lg muted">Built under pressure. Shipped on time.</p>
+      <p class="body-lg muted">Every stage I've been on — {hackathons.length} stages, {winCount} podiums.</p>
     </div>
   </section>
 
   <section class="events-timeline">
     <div class="container">
+      <div class="filter-bar" role="toolbar" aria-label="Filter events by outcome">
+        <div class="filter-indicator"></div>
+        <button class="filter-chip mono-label active" data-filter="all" aria-pressed="true">All ({hackathons.length})</button>
+        <button class="filter-chip mono-label" data-filter="wins" aria-pressed="false">Wins & Finals ({winCount})</button>
+        <button class="filter-chip mono-label" data-filter="rest" aria-pressed="false">Participations ({hackathons.length - winCount})</button>
+      </div>
+      <div class="sr-only" aria-live="polite" aria-atomic="true" id="filter-status"></div>
       <div class="timeline">
         <div class="timeline-track" aria-hidden="true">
           <div class="timeline-line"></div>
         </div>
         {hackathons.map((h, i) => (
-          <article class="timeline-item" data-index={i}>
+          <article class="timeline-item" data-index={i} data-group={isWin(h.status) ? 'wins' : 'rest'}>
             <div class="timeline-left">
               <span class="timeline-date mono-label">{h.date}</span>
             </div>
@@ -28,7 +38,7 @@ import hackathons from '../content/hackathons.json';
               <div class="card-spotlight" aria-hidden="true"></div>
               <div class="card-top">
                 <h2 class="event-name heading-3 text-truncate">{h.event}</h2>
-                <span class={`status-badge mono-label ${h.status === 'finalist' ? 'status--finalist' : h.status === 'pending' ? 'status--pending' : 'status--no'}`}>{h.status === 'finalist' ? 'Finalist' : h.status === 'pending' ? 'Pending' : 'Participated'}</span>
+                <span class={`status-badge mono-label ${h.status === 'finalist' || (h.status !== 'pending' && h.status !== "didn't qualify") ? 'status--finalist' : h.status === 'pending' ? 'status--pending' : 'status--no'}`}>{h.status === 'finalist' ? 'Finalist' : h.status === 'pending' ? 'Pending' : h.status === "didn't qualify" ? 'Participated' : h.status}</span>
               </div>
               {h.projectUrl ? (
                 <a href={h.projectUrl} target="_blank" rel="noopener" class="project-name mono-label">{h.project} →</a>
@@ -132,6 +142,45 @@ import hackathons from '../content/hackathons.json';
     padding-top: var(--space-xs);
   }
 
+  /* Filter bar */
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-3xl);
+    position: relative;
+  }
+  .filter-indicator {
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    background: var(--color-accent);
+    transition: left 200ms var(--ease-out), width 200ms var(--ease-out);
+    pointer-events: none;
+  }
+  .filter-chip {
+    background: transparent;
+    border: 1px solid var(--color-border-subtle);
+    color: var(--color-text-muted);
+    padding: var(--space-sm) var(--space-lg);
+    font-size: var(--text-xs);
+    transition: border-color var(--transition-instant), color var(--transition-instant), background var(--transition-instant);
+    position: relative;
+  }
+  .filter-chip:hover,
+  .filter-chip.active {
+    border-color: var(--color-accent);
+    color: var(--color-primary);
+    background: var(--color-accent);
+  }
+  .filter-chip:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+  .timeline-item[data-hidden="true"] {
+    display: none;
+  }
+
   /* Dot */
   .timeline-dot {
     display: none;
@@ -209,7 +258,8 @@ import hackathons from '../content/hackathons.json';
   }
   .status--pending {
     background: var(--color-surface);
-    color: var(--color-primary);
+    color: var(--color-text);
+    border: 1px solid var(--color-border-subtle);
   }
   .status--no {
     background: transparent;
@@ -294,6 +344,60 @@ import hackathons from '../content/hackathons.json';
     if (!item) return;
     card.addEventListener('mouseenter', () => item.classList.add('is-dot-active'));
     card.addEventListener('mouseleave', () => item.classList.remove('is-dot-active'));
+  });
+
+  // Outcome filter
+  const chips = document.querySelectorAll('.filter-chip');
+  const timelineItems = document.querySelectorAll('.timeline-item');
+  const indicator = document.querySelector('.filter-indicator') as HTMLElement;
+
+  function moveIndicator(chip: Element) {
+    if (!indicator) return;
+    const rect = chip.getBoundingClientRect();
+    const barRect = chip.parentElement!.getBoundingClientRect();
+    indicator.style.left = `${rect.left - barRect.left}px`;
+    indicator.style.width = `${rect.width}px`;
+  }
+
+  function updateFilterStatus() {
+    const visible = document.querySelectorAll('.timeline-item:not([data-hidden="true"])');
+    const status = document.getElementById('filter-status');
+    if (status) {
+      status.textContent = visible.length + ' of ' + timelineItems.length + ' events shown';
+    }
+  }
+
+  const startChip = document.querySelector('.filter-chip.active');
+  if (startChip) moveIndicator(startChip);
+  window.addEventListener('resize', () => {
+    const active = document.querySelector('.filter-chip.active');
+    if (active) moveIndicator(active);
+  });
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => {
+        c.classList.remove('active');
+        c.setAttribute('aria-pressed', 'false');
+      });
+      chip.classList.add('active');
+      chip.setAttribute('aria-pressed', 'true');
+      moveIndicator(chip);
+
+      const filter = chip.getAttribute('data-filter');
+      timelineItems.forEach(item => {
+        const group = item.getAttribute('data-group');
+        const show = filter === 'all' || group === filter;
+        if (show) {
+          item.removeAttribute('data-hidden');
+          (item as HTMLElement).style.display = '';
+        } else {
+          item.setAttribute('data-hidden', 'true');
+          (item as HTMLElement).style.display = 'none';
+        }
+      });
+      updateFilterStatus();
+    });
   });
 
   // Tilt + spotlight

@@ -85,7 +85,7 @@
     "tech": ["HTML", "CSS", "JavaScript", "GitHub Actions"],
     "github": "https://github.com/HyperZx2O/notes-porbo",
     "live": "https://hyperzx2o.github.io/notes-porbo/",
-    "stars": 4,
+    "stars": 5,
     "category": "tool",
     "fork": false
   },
@@ -98,5 +98,35 @@
     "stars": 92,
     "category": "tool",
     "fork": false
+  },
+  {
+    "name": "qari-cli",
+    "description": "Terminal scripture library packaged as a single static Rust binary: a three-column TUI reader with fourteen shelves (six revelations and eight hadith books), live fuzzy search, themes, bookmarks, and an offline-first disk cache.",
+    "tech": ["Rust", "Ratatui", "Crossterm"],
+    "github": "https://github.com/HyperZx2O/qari-cli",
+    "live": "https://www.npmjs.com/package/qari-cli",
+    "stars": 6,
+    "category": "tool",
+    "fork": false
+  },
+  {
+    "name": "Ship Cargo Loading System",
+    "description": "Single-dock port cargo pipeline from Digital Logic Design lab: 4-bit cargo accumulation in a synchronous register, capacity-threshold comparison, tri-LED status, dual 7-seg dock display, and an auto-incrementing departure counter.",
+    "tech": ["Proteus 8", "74LS TTL", "Digital Logic"],
+    "github": "https://github.com/HyperZx2O/ship-cargo-loading-system",
+    "live": "https://hyperzx2o.github.io/ship-cargo-loading-system/",
+    "stars": 0,
+    "category": "systems",
+    "fork": false
+  },
+  {
+    "name": "Purrcel",
+    "description": "Landscape 2D endless runner about a courier cat: auto-run across a streamed procedural rooftop route, timed parcel deliveries, four unlockable districts, and an upgrades-and-breeds economy between runs. 184 EditMode and 32 PlayMode tests green.",
+    "tech": ["Unity", "C#", "URP", "RevenueCat"],
+    "github": "https://github.com/HyperZx2O/Purrcel",
+    "live": null,
+    "stars": 0,
+    "category": "game",
+    "fork": true
   }
 ]

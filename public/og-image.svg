@@ -2,15 +2,15 @@
   <defs>
     <!-- Deep blue gradient with subtle depth -->
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0000F2"/>
-      <stop offset="50%" stop-color="#0000D4"/>
-      <stop offset="100%" stop-color="#0000AA"/>
+      <stop offset="0%" stop-color="#0E0E28"/>
+      <stop offset="50%" stop-color="#0A0A22"/>
+      <stop offset="100%" stop-color="#07071A"/>
     </linearGradient>
     
     <!-- Radial glow for depth -->
     <radialGradient id="glow" cx="50%" cy="45%" r="60%">
       <stop offset="0%" stop-color="rgba(237,255,69,0.08)"/>
-      <stop offset="100%" stop-color="rgba(0,0,242,0)"/>
+      <stop offset="100%" stop-color="rgba(7,7,26,0)"/>
     </radialGradient>
     
     <!-- Sunburst pattern -->
@@ -73,23 +73,29 @@
   <circle cx="180" cy="180" r="2" fill="#EDFF45" opacity="0.3"/>
   <circle cx="1020" cy="450" r="2" fill="#EDFF45" opacity="0.3"/>
   
+  <!-- Brand mark -->
+  <g transform="translate(552,64) scale(0.375)">
+    <rect width="256" height="256" rx="56" fill="#EDFF45"/>
+    <path fill-rule="evenodd" fill="#07071A" d="M40 40h64v68h48V40h64v176h-64v-68h-48v68H40V40z"/>
+  </g>
+  
   <!-- Main name: large, bold, commanding -->
-  <text x="600" y="260" text-anchor="middle" font-family="Georgia, 'Playfair Display', 'Times New Roman', serif" font-size="108" font-weight="700" fill="#FFFFFF" letter-spacing="6">HYPERZX2O</text>
+  <text x="600" y="300" text-anchor="middle" font-family="Georgia, 'Playfair Display', 'Times New Roman', serif" font-size="96" font-weight="700" fill="#FFFFFF" letter-spacing="6">HYPERZX2O</text>
   
   <!-- Accent line under name -->
-  <rect x="420" y="285" width="360" height="3" fill="#EDFF45" opacity="0.8"/>
+  <rect x="420" y="325" width="360" height="3" fill="#EDFF45" opacity="0.8"/>
   
   <!-- Subtitle: PORTFOLIO in accent color -->
-  <text x="600" y="340" text-anchor="middle" font-family="'Helvetica Neue', Arial, sans-serif" font-size="28" fill="#EDFF45" letter-spacing="16" font-weight="400">PORTFOLIO</text>
+  <text x="600" y="380" text-anchor="middle" font-family="'Helvetica Neue', Arial, sans-serif" font-size="28" fill="#EDFF45" letter-spacing="16" font-weight="400">PORTFOLIO</text>
   
   <!-- Tagline: three identities -->
-  <text x="600" y="400" text-anchor="middle" font-family="'Helvetica Neue', Arial, sans-serif" font-size="16" fill="rgba(255,255,255,0.5)" letter-spacing="3" font-weight="300">CSE @ IUT · WEB DEV · COMPETITIVE PROGRAMMING</text>
+  <text x="600" y="440" text-anchor="middle" font-family="'Helvetica Neue', Arial, sans-serif" font-size="16" fill="rgba(255,255,255,0.5)" letter-spacing="3" font-weight="300">CSE @ IUT · WEB DEV · COMPETITIVE PROGRAMMING</text>
   
   <!-- Divider line -->
-  <line x1="500" y1="440" x2="700" y2="440" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+  <line x1="500" y1="480" x2="700" y2="480" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
   
   <!-- GitHub handle -->
-  <text x="600" y="480" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="13" fill="rgba(255,255,255,0.35)" letter-spacing="1.5">github.com/HyperZx2O</text>
+  <text x="600" y="520" text-anchor="middle" font-family="'SF Mono', 'Fira Code', monospace" font-size="13" fill="rgba(255,255,255,0.35)" letter-spacing="1.5">github.com/HyperZx2O</text>
   
   <!-- Bottom accent bar -->
   <rect x="0" y="624" width="1200" height="6" fill="#EDFF45" opacity="0.6"/>

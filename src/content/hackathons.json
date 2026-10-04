@@ -1,5 +1,69 @@
 [
   {
+    "event": "ALOHA Bangladesh",
+    "date": "2015–16",
+    "team": "Solo",
+    "project": "100/100 Certificate of Excellence (Levels One to Four)",
+    "projectUrl": null,
+    "status": "100/100"
+  },
+  {
+    "event": "9th SGHSC Inter School Science, Chess, Art & Cultural Festival",
+    "date": "2017",
+    "team": "Solo",
+    "project": "2nd Position (Class Project)",
+    "projectUrl": null,
+    "status": "2nd Position"
+  },
+  {
+    "event": "IFSE Global Math Talent Probe & English Test",
+    "date": "2017–20",
+    "team": "Solo",
+    "project": "Ranked 3 years running (72 Math, 84 English)",
+    "projectUrl": null,
+    "status": "Ranked"
+  },
+  {
+    "event": "BSB Foundation Bijoy Utsab",
+    "date": "2018",
+    "team": "Solo",
+    "project": "English Olympiad Champion",
+    "projectUrl": null,
+    "status": "Champion"
+  },
+  {
+    "event": "12th SGHSC Inter School Science, Chess, Art & Cultural Festival",
+    "date": "2020",
+    "team": "Solo",
+    "project": "2nd Position (Class Project)",
+    "projectUrl": null,
+    "status": "2nd Position"
+  },
+  {
+    "event": "International Novus Conference, City Montessori School Lucknow",
+    "date": "2020–21",
+    "team": "Solo",
+    "project": "3rd Position (Metamorphose)",
+    "projectUrl": null,
+    "status": "3rd Position"
+  },
+  {
+    "event": "3rd Annual Notre Dame Math Festival",
+    "date": "2023",
+    "team": "Solo",
+    "project": "Crossword Champion",
+    "projectUrl": null,
+    "status": "Champion"
+  },
+  {
+    "event": "Fruits Fiesta Season 5, ND Eco and Space Club",
+    "date": "2023",
+    "team": "Solo",
+    "project": "Fruits Quiz Champion",
+    "projectUrl": null,
+    "status": "Champion"
+  },
+  {
     "event": "Casemotion 2025",
     "date": "Jul-Aug 2025",
     "team": "Md Imtiaz Alam, Sazid Hasan Khan, Md Khalid Bin Shahirul",
@@ -80,11 +144,43 @@
     "status": "didn't qualify"
   },
   {
-    "event": "QuantamHacks",
+    "event": "QuantumHacks",
     "date": "Aug 2026",
     "team": "Noha Saabreen",
     "project": "Reading Into You",
     "projectUrl": "https://github.com/HyperZx2O/reading-into-you",
+    "status": "didn't qualify"
+  },
+  {
+    "event": "Lofistack Hackathon",
+    "date": "Aug 2026",
+    "team": "Anha Khan",
+    "project": "RouteShift",
+    "projectUrl": "https://github.com/HyperZx2O/lsh26-t048-p11",
+    "status": "didn't qualify"
+  },
+  {
+    "event": "Racdox Hackathon",
+    "date": "Sep 2026",
+    "team": "Solo",
+    "project": "Heaven Furniture Mart",
+    "projectUrl": "https://github.com/HyperZx2O/heaven-furniture-mart",
+    "status": "didn't qualify"
+  },
+  {
+    "event": "BUP CSE Fest 26",
+    "date": "Sep 2026",
+    "team": "Mutsavi Saraf, Sanjid Ahsan, Tasmiah Tanha",
+    "project": "CampusWatt",
+    "projectUrl": "https://github.com/HyperZx2O/CampusWatt",
+    "status": "didn't qualify"
+  },
+  {
+    "event": "RevenueCat Shipaton",
+    "date": "Jul-Oct 2026",
+    "team": "Anha Khan",
+    "project": "Purrcel",
+    "projectUrl": "https://github.com/Anha-Khan/Purrcel",
     "status": "pending"
   }
 ]
