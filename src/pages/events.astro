@@ -5,7 +5,7 @@ import hackathons from '../content/hackathons.json';
 const isWin = (status: string) => status !== "didn't qualify" && status !== 'pending';
 const winCount = hackathons.filter((h) => isWin(h.status)).length;
 ---
-<Layout title="Events — HyperZx2O">
+<Layout title="Events — HyperZx2O" description="Every stage I've been on — 23 events and 11 podiums: hackathons, olympiads, and competitions from 2015 to today.">
 
   <section class="events-hero section">
     <div class="container">
@@ -402,8 +402,8 @@ const winCount = hackathons.filter((h) => isWin(h.status)).length;
 
   // Tilt + spotlight
   cards.forEach(card => {
-    card.addEventListener('mousemove', (e: MouseEvent) => (window as any).applyTilt(e));
-    card.addEventListener('mouseleave', (e: MouseEvent) => (window as any).resetTilt(e));
-    card.addEventListener('touchstart', (e: MouseEvent) => (window as any).resetTilt(e));
+    card.addEventListener('mousemove', (e: Event) => (window as any).applyTilt(e as MouseEvent));
+    card.addEventListener('mouseleave', (e: Event) => (window as any).resetTilt(e as MouseEvent));
+    card.addEventListener('touchstart', (e: Event) => (window as any).resetTilt(e as MouseEvent));
   });
 </script>

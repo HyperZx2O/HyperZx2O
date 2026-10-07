@@ -1,8 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Picture } from 'astro:assets';
 const base = import.meta.env.BASE_URL;
+
+const stripModules = import.meta.glob('../assets/gallery/*.{jpg,jpeg,png}', { eager: true }) as Record<string, { default: ImageMetadata }>;
+const stripPhotos = [
+  'DSC_5278.jpg', 'DSC_5266.jpg', 'DSC_5152.jpg', 'DSC_5071.jpg', 'DSC_4980.jpg',
+  'DSC_4915.jpg', 'DSC_4894.jpg', 'DSC_4888.jpg', 'DSC_4887.jpg', 'DSC_4823.jpg',
+  'DSC_4796.jpg', 'DSC_4786.jpg', 'IMG_20250923_114929.jpg', 'IMG_20250813_091240.jpg',
+  '20260322_182940.jpg', '20260119_161651.jpg', '1766558246484.jpg',
+];
 ---
-<Layout title="HyperZx2O — Portfolio">
+<Layout title="HyperZx2O — Portfolio" description="MD. Sadman Saif Zarif — CSE student at IUT building full-stack apps, AI systems, and hackathon projects that ship.">
 
   <!-- Hero -->
   <section class="hero">
@@ -206,23 +215,17 @@ const base = import.meta.env.BASE_URL;
   <!-- Photo Strip -->
   <section class="photostrip section reveal">
     <div class="photostrip-scroll">
-      <img src={`${base}gallery/DSC_5278.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src={`${base}gallery/DSC_5266.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src={`${base}gallery/DSC_5152.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src={`${base}gallery/DSC_5071.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src={`${base}gallery/DSC_4980.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src={`${base}gallery/DSC_4915.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src={`${base}gallery/DSC_4894.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src={`${base}gallery/DSC_4888.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src={`${base}gallery/DSC_4887.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src={`${base}gallery/DSC_4823.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src={`${base}gallery/DSC_4796.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src={`${base}gallery/DSC_4786.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src={`${base}gallery/IMG_20250923_114929.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src={`${base}gallery/IMG_20250813_091240.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src={`${base}gallery/20260322_182940.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src={`${base}gallery/20260119_161651.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
-      <img src={`${base}gallery/1766558246484.jpg`} alt="" width="400" height="300" loading="lazy" decoding="async" />
+      {stripPhotos.map((file) => (
+        <Picture
+          src={stripModules[`../assets/gallery/${file}`].default}
+          widths={[400]}
+          formats={['avif', 'webp']}
+          sizes="400px"
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+      ))}
     </div>
     <svg class="photostrip-noise" aria-hidden="true"><filter id="ps-noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#ps-noise)" opacity="0.08"/></svg>
   </section>
@@ -258,10 +261,11 @@ const base = import.meta.env.BASE_URL;
   <script is:inline>
     // Cursor‑reactive tilt + spotlight for featured cards
     const tiltCards = document.querySelectorAll('.featured-card');
+    /** @typedef {{ applyTilt(ev: Event): void; resetTilt(ev: Event): void; }} TiltApi */
     tiltCards.forEach(card => {
-      card.addEventListener('mousemove', (e) => (window as any).applyTilt(e));
-      card.addEventListener('mouseleave', (e) => (window as any).resetTilt(e));
-      card.addEventListener('touchstart', (e) => (window as any).resetTilt(e));
+      card.addEventListener('mousemove', (e) => (/** @type {TiltApi} */ (window)).applyTilt(e));
+      card.addEventListener('mouseleave', (e) => (/** @type {TiltApi} */ (window)).resetTilt(e));
+      card.addEventListener('touchstart', (e) => (/** @type {TiltApi} */ (window)).resetTilt(e));
     });
   </script>
 
@@ -981,6 +985,9 @@ const base = import.meta.env.BASE_URL;
   .photostrip-scroll::-webkit-scrollbar {
     display: none;
   }
+  .photostrip-scroll picture {
+    display: contents;
+  }
   .photostrip-scroll img {
     flex: 0 0 auto;
     width: 320px;
@@ -1304,14 +1311,14 @@ const base = import.meta.env.BASE_URL;
 
 <script>
   // Accordion
-  document.querySelectorAll('.t-acc-head').forEach(head => {
+  document.querySelectorAll<HTMLElement>('.t-acc-head').forEach(head => {
     head.addEventListener('click', () => {
       const acc = head.closest('.t-acc')!;
       const open = acc.getAttribute('data-open') === 'true';
       acc.setAttribute('data-open', String(!open));
       head.setAttribute('aria-expanded', String(!open));
     });
-    head.addEventListener('keydown', (e) => {
+    head.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         const acc = head.closest('.t-acc')!;
         acc.setAttribute('data-open', 'false');

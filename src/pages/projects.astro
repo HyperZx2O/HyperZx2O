@@ -15,7 +15,7 @@ const categoryLabels = Object.fromEntries(
   categories.filter(c => c.key !== 'all').map(c => [c.key, c.label.toUpperCase()])
 );
 ---
-<Layout title="Projects — HyperZx2O">
+<Layout title="Projects — HyperZx2O" description="13 projects by MD. Sadman Saif Zarif — full-stack apps, AI/ML systems, tools, and games, with live demos and source code.">
 
   <section class="projects-hero section reveal">
     <div class="container">
@@ -272,8 +272,12 @@ const categoryLabels = Object.fromEntries(
 
   chips.forEach(chip => {
     chip.addEventListener('click', () => {
-      chips.forEach(c => c.classList.remove('active'));
+      chips.forEach(c => {
+        c.classList.remove('active');
+        c.setAttribute('aria-pressed', 'false');
+      });
       chip.classList.add('active');
+      chip.setAttribute('aria-pressed', 'true');
       moveIndicator(chip);
 
       const category = chip.getAttribute('data-category');
@@ -298,8 +302,8 @@ const categoryLabels = Object.fromEntries(
 
   // Tilt + spotlight
   cards.forEach(card => {
-    card.addEventListener('mousemove', (e: MouseEvent) => (window as any).applyTilt(e));
-    card.addEventListener('mouseleave', (e: MouseEvent) => (window as any).resetTilt(e));
-    card.addEventListener('touchstart', (e: MouseEvent) => (window as any).resetTilt(e));
+    card.addEventListener('mousemove', (e: Event) => (window as any).applyTilt(e as MouseEvent));
+    card.addEventListener('mouseleave', (e: Event) => (window as any).resetTilt(e as MouseEvent));
+    card.addEventListener('touchstart', (e: Event) => (window as any).resetTilt(e as MouseEvent));
   });
 </script>
