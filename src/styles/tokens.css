@@ -31,6 +31,15 @@
   --text-base: 1rem;
   --text-lg: 1.125rem;
 
+  /* Long-form reading (articles) */
+  --font-prose: var(--font-display);
+  --text-prose: 1.0625rem;
+  --text-prose-sm: 0.9375rem;
+  --leading-prose: 1.78;
+  --measure-prose: 68ch;
+  --measure-wide: 82ch;
+  --measure-aside: 200px;
+
   /* Radius */
   --radius-full: 9999px;
 

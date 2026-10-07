@@ -24,7 +24,7 @@ const navItems = [
   { label: 'Home', href: base },
   { label: 'Projects', href: `${base}projects/` },
   { label: 'Events', href: `${base}events/` },
-  { label: 'Guides', href: `${base}guides/` },
+  { label: 'Writing', href: `${base}guides/` },
   { label: 'Gallery', href: `${base}gallery/` },
 ];
 ---
@@ -41,7 +41,28 @@ const navItems = [
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="theme-color" content="#07071A" />
+  <link rel="canonical" href={new URL(Astro.url.pathname, import.meta.env.SITE).href} />
   <link rel="icon" type="image/svg+xml" href={`${base}icons/favicon-a-favicon.svg`} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Person',
+        name: 'MD. Sadman Saif Zarif',
+        url: `${import.meta.env.SITE}${import.meta.env.BASE_URL}`,
+        sameAs: [
+          'https://github.com/HyperZx2O',
+          'https://codeforces.com/profile/hyperzx20',
+          'https://linkedin.com/in/md-sadman-saif-136b2229b',
+        ],
+      },
+      {
+        '@type': 'WebSite',
+        name: 'HyperZx2O — Portfolio',
+        url: `${import.meta.env.SITE}${import.meta.env.BASE_URL}`,
+      },
+    ],
+  })} />
   <title>{title}</title>
 
   <!-- Preload critical fonts -->
@@ -404,7 +425,6 @@ const navItems = [
 
     // --- Header hide/show on scroll ---
     const header = document.querySelector('.site-header') as HTMLElement;
-    let lastScroll = 0;
     const SCROLL_THRESHOLD = 10;
 
     lenis.on('scroll', ({ scroll, velocity }: { scroll: number; velocity: number }) => {
@@ -421,12 +441,12 @@ const navItems = [
     });
 
     // --- Mobile menu: use Lenis stop/start ---
-    const toggle = document.querySelector('.nav-toggle');
+    const toggle = document.querySelector('.nav-toggle') as HTMLButtonElement | null;
     const links = document.querySelector('.nav-links');
 
     function trapMenuFocus(e: KeyboardEvent) {
       if (links?.getAttribute('data-open') !== 'true') return;
-      const focusable = Array.from(links.querySelectorAll('a, button')).filter(el => el.offsetParent !== null);
+      const focusable = Array.from(links.querySelectorAll<HTMLElement>('a, button')).filter(el => el.offsetParent !== null);
       if (focusable.length === 0) return;
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
@@ -500,7 +520,7 @@ const navItems = [
       const cy = rect.top + rect.height / 2;
       const dx = (e.clientX - cx) / (rect.width / 2);
       const dy = (e.clientY - cy) / (rect.height / 2);
-      card.__tiltTarget = { x: `${dy * 6}deg`, y: `${-dx * 6}deg` };
+      (card as any).__tiltTarget = { x: `${dy * 6}deg`, y: `${-dx * 6}deg` };
       const mx = ((e.clientX - rect.left) / rect.width) * 100;
       const my = ((e.clientY - rect.top) / rect.height) * 100;
       card.style.setProperty('--mouse-x', `${mx}%`);
@@ -508,7 +528,7 @@ const navItems = [
     };
     (window as any).resetTilt = function(e: MouseEvent) {
       const card = e.currentTarget as HTMLElement;
-      card.__tiltTarget = { x: '0deg', y: '0deg' };
+      (card as any).__tiltTarget = { x: '0deg', y: '0deg' };
     };
 
     // Spring-driven tilt (velocity-aware + interruptible). Each axis is an
